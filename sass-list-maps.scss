@@ -80,11 +80,11 @@
 	$value: nth($keys-and-value, $arg-length);
 	$key-length: $arg-length - 1;
 	@if $key-length == 0 { $value: if(type-of($value) == 'list', map-merge($list, $value), map-merge($list, list($value ()))); }
-  @else { $start: if(type-of($value) == 'list', 0, 1);
-    @for $i from $start through $key-length {
-  		$new-list: (); $old-list: ();
-  		@if $i == 0 { $new-list: $value; } @else { $new-list: list(nth($keys-and-value, $key-length + 1 - $i) $value); }
-  		@if $i == $key-length { $old-list: $list; } @else { $old-list: map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or (); }
-  		$value: map-merge($old-list, $new-list); } }
+	@else { $start: if(type-of($value) == 'list', 0, 1);
+		@for $i from $start through $key-length {
+			$new-list: (); $old-list: ();
+			@if $i == 0 { $new-list: $value; } @else { $new-list: list(nth($keys-and-value, $key-length + 1 - $i) $value); }
+			@if $i == $key-length { $old-list: $list; } @else { $old-list: map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or (); }
+			$value: map-merge($old-list, $new-list); } }
 	@return $value;
 }
