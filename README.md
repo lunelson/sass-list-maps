@@ -27,7 +27,7 @@ in any version/compiler other than ruby-sass 3.3+ */
 $native-map: ( alpha: 1, beta: 2, gamma: 3,);
 ```
 
-So a list-map is a list of pairs: it can be of any length, but each item in that list must be a list of two. The first item in each pair is the 'key', the second the 'value'. This 'value' can be a primitive (number, boolean, string) or a list (can also be another list-map). A 'nested' list-map (list-map within a list-map) therefore, looks like this in its simplest form (compared again to a native map):
+A list-map is a list of pairs: it can be of any length, but each item in that list must be a list of two. The first item in each pair is the 'key', the second the 'value'. This 'value' can be a primitive (number, boolean, string) or a list (can also be another list-map). A 'nested' list-map (list-map within a list-map) therefore, looks like this in its simplest form (compared again to a native map):
 
 ```scss
 $list-map-z: (
@@ -47,15 +47,15 @@ $native-map-z: (
 );
 ```
 
-It should be clear that list-maps and native maps are very similar. In fact they are in principle the same. For this reason it was possible to `reverse-engineer` ruby-sass' 3.3+ map logic to work with lists instead.
+It should be clear that list-maps and native maps are very similar. In fact they are in principle the same. For this reason it was possible to 'reverse engineer' ruby-sass' 3.3+ map logic to work with lists.
 
 ### 'List-map' functions
 
-The functions provided here for list-maps have the same names as their ruby-sass 3.3+ counterparts. Therefore, the following code assume a sass environment other than ruby running sass 3.3.rc1 or higher, where they would otherwise conflict with the built-in functions.
+The functions provided here for 'list-maps' have the same names as their ruby-sass 3.3+ native map counterparts. Therefore, the following code assume a sass environment other than ruby running sass 3.3.rc1 or higher, where they would otherwise conflict with the built-in functions.
 
 #### Basic
 
-All current ruby-sass map functions—as of this writing—are implemented in list-based form, including `map-get($list, $key)`, `map-merge($list1, $list2)`, `map-remove($list, $key)`, `map-keys($list)`, `map-values($list)`, and `map-has-key($list, $key)`. As with native maps, standard list functions can also be used on list-maps since they are just lists anyway.
+All current ruby-sass map functions—as of this writing—are implemented here, including `map-get($list, $key)`, `map-merge($list1, $list2)`, `map-remove($list, $key)`, `map-keys($list)`, `map-values($list)`, and `map-has-key($list, $key)`. As with native maps, standard list functions can also be used on list-maps since they are just lists anyway.
 
 ##### 1. `map-keys($list)`, `map-values($list)`, `map-has-key($list, $key)`
 
