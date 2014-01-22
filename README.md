@@ -1,6 +1,6 @@
 ## Sass List–Maps
 
-List-based Map functionality for versions/compilers of SassCSS other than ruby-sass 3.3.x+. Hashes for everybody.
+List-based Map (hash) functionality for versions/compilers of SassCSS other than ruby-sass 3.3.x+.
 
 ![Sass hash.](sass-hash.jpg)
 
