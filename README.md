@@ -100,7 +100,7 @@ $short-map: map-remove($list-map, alpha);
 // -> $short-map = ( beta 2, gamma 3)
 ```
 
-**NB**: notice the use of the `list()` function in the last example. This is due to the fact that Sass has no succinct way to specify a list containing another list, if the containing list is only 1 element in length. Since a list-map must always be a list-of-lists—even if it only contains one item—you must use the `list()` helper function (included) if you want to create a map-list with only one pair.
+**NB**: notice the use of the `list()` function in the second example. This is due to the fact that Sass has no succinct way to specify a list containing another list, if the containing list is only 1 element in length. Since a list-map must always be a list-of-lists—even if it only contains one item—you must use the `list()` helper function (included) if you want to create a map-list with only one pair.
 
 #### Advanced
 
