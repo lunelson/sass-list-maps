@@ -6,7 +6,7 @@ List-based Map (hash) functionality for versions/compilers of SassCSS other than
 
 ### Introduction
 
-Maps (also known as hashes or objects\*) allow dynamic creating, setting and retrieving of data. They are supported natively in ruby-sass as of version 3.3.rc1—with their own syntax and functions; but for earlier ruby-sass versions—and for the increasingly popular and ultra-fast libsass C-based compiler (until the point at which maps are integrated there natively)—this is an alternative solution. These functions feature-match ruby-sass 3.3's map functionality (and syntax) as closely as possible using the `list` data-type. Additionally, some functions are provided to extend this map functionality with nested getting and merging/setting.
+Maps (also known as hashes or objects\*) allow dynamic creating, setting and retrieving of data. They are supported natively in ruby-sass as of version 3.3.rc1 with their own syntax and functions, but for earlier ruby-sass versions—and for the increasingly popular and ultra-fast libsass C-based compiler, until the point at which maps are integrated there natively—this is an alternative solution. These functions feature-match ruby-sass 3.3's map functionality (and syntax) as closely as possible using the `list` data-type. Additionally, some functions are provided to extend this map functionality with nested getting and merging/setting.
 
 \* objects (as in javascript) are not exactly the same thing as maps and hashes, but for these purposes close enough.
 
