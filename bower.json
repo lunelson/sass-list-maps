@@ -5,13 +5,16 @@
   "authors": [
     "Lu Nelson <lunelson@gmail.com>"
   ],
-  "description": "Map functionality for libsass and ruby-sass <3.3.x, using lists.",
+  "description": "Forward-compatible map functionality for libsass and ruby-sass <3.3.x",
   "main": "sass-list-maps.scss",
   "keywords": [
     "libsass",
     "sass",
     "map",
-    "list"
+    "maps",
+    "list",
+    "lists",
+    "data"
   ],
   "license": "MIT",
   "ignore": [

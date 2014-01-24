@@ -1,28 +1,37 @@
 ## Sass List–Maps
 
-List-based Map (hash) functionality for versions/compilers of SassCSS other than ruby-sass 3.3.x+.
+Forward-compatible list-based map (hash) functionality for [libsass](https://github.com/hcatlin/libsass) and [ruby-sass](http://sass-lang.com/) < 3.3.x.
 
-![Sass hash.](sass-hash.jpg)
+![](sass-hash.jpg)
+
+*Some Sass hash.*
+
+##### Update: You can now install this code as a Bower package:
+
+```sh
+bower install sass-list-maps
+```
 
 ### Introduction
 
-Maps (also known as hashes or objects\*) allow dynamic creating, setting and retrieving of data. They are supported natively in ruby-sass as of version 3.3.rc1 with their own syntax and functions, but for earlier ruby-sass versions—and for the increasingly popular and ultra-fast libsass C-based compiler, until the point at which maps are integrated there natively—this is an alternative solution. These functions feature-match ruby-sass 3.3's map functionality (and syntax) as closely as possible using the `list` data-type. Additionally, some functions are provided to extend this map functionality with nested getting and merging/setting.
+Maps (also known as hashes or objects\*) allow dynamic creating, setting and retrieving of data. They are supported natively in ruby-sass as of version 3.3.rc1 with new syntax and functions; but for earlier ruby-sass versions—and for the increasingly popular ultra-fast libsass C-based compiler (until the point at which maps are integrated there natively)—this is an alternative solution. These functions feature-match ruby-sass 3.3's map functionality and syntax as closely as possible, using the `list` data-type. Additionally, some functions are provided to extend this map functionality with nested getting and merging/setting.
 
 \* objects (as in javascript) are not exactly the same thing as maps and hashes, but for these purposes close enough.
 
 ### 'List-map' syntax
 
-List-maps—as I'll refer to them for the sake of clarity—as opposed to native maps, are like any other list in Sass but must be formatted to work with these functions. The syntax I recommend keeps as close as possible to that of native maps, but differs in that there are of course no colons, and the placement of commas is more critical (trailing commas are allowed in native maps and in lists in ruby-sass 3.3+—i.e. after the last item—but not in any other version):
+List-maps—as I'll refer to them for the sake of clarity, as opposed to native maps—are like any other list in Sass but must be formatted to work with these functions. The syntax I recommend keeps as close as possible to that of native maps, but differs in that there are of course no colons (`:`), and the placement of commas is more critical (trailing commas—i.e. commas after the last item—are allowed in native maps and in lists in ruby-sass 3.3+ but not in any other version):
 
 
 ```scss
 /* example of a list-map -- compatible with any
-version/compiler of sass */
+version/compiler of sass including 3.3+ */
 
 $list-map: ( alpha 1, beta 2, gamma 3 );
 
 /* example of native map -- would cause an error
-in any version/compiler other than ruby-sass 3.3+ */
+in any version/compiler other than ruby-sass 3.3+
+-- notice colons and trailing comma */
 
 $native-map: ( alpha: 1, beta: 2, gamma: 3,);
 ```
@@ -51,11 +60,11 @@ It should be clear that list-maps and native maps are very similar. In fact they
 
 ### 'List-map' functions
 
-The functions provided here for 'list-maps' have the same names as their ruby-sass 3.3+ native map counterparts. Therefore, the following code assume a sass environment other than ruby running sass 3.3.rc1 or higher, where they would otherwise conflict with the built-in functions.
+The functions for 'list-maps' have the same names as the native map functions in ruby-sass 3.3+. Therefore, the following code assume a sass environment other than ruby running sass 3.3.rc1 or higher, where they would otherwise conflict.
 
 #### Basic
 
-All current ruby-sass map functions—as of this writing—are implemented here, including `map-get($list, $key)`, `map-merge($list1, $list2)`, `map-remove($list, $key)`, `map-keys($list)`, `map-values($list)`, and `map-has-key($list, $key)`. As with native maps, standard list functions can also be used on list-maps since they are just lists anyway.
+All current ruby-sass map functions—as of this writing—are implemented, including `map-get($list, $key)`, `map-merge($list1, $list2)`, `map-remove($list, $key)`, `map-keys($list)`, `map-values($list)`, and `map-has-key($list, $key)`. As with native maps, standard list functions can also be used on list-maps since they are just lists anyway.
 
 ##### 1. `map-keys($list)`, `map-values($list)`, `map-has-key($list, $key)`
 
@@ -183,11 +192,12 @@ There are a few points that bear mentioning/repeating:
 ### To-Dos
 
 * Make a depth-based version of `map-remove()`
-* Make this in to a bower package
+* ~~Make this in to a bower package~~ *done*
 * Make this in to a gem
+* Push a native maps version of the 'advanced' functions above
 
 ### Acknowledgements
 
-First and foremost, my gratitude to the core Sass team (@nex3 and @chriseppstein)for its tireless advancement of the gold-standard of CSS pre-processing. Secondly, to @jedfoster and @anotheruiguy for [Sassmeister](http://sassmeister.com/), which makes developing complex functions and mixins painless (relatively).
+First and foremost, my gratitude to the core Sass devs (@nex3 and @chriseppstein) for their tireless advancement of the gold-standard of CSS pre-processing, and secondly to @jedfoster and @anotheruiguy for [Sassmeister](http://sassmeister.com/), which makes developing complex functions and mixins painless (relatively).
 
 Also acknowledgements to @HugoGiraudel for [SassyLists](http://sassylists.com/), from which I borrowed the `slice()` and `replace-nth()` list functions, and his `debug()` function, without which I would not have been able to figure out what was going on (and going wrong) in ruby-sass 3.2 and libsass.
