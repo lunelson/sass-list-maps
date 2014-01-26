@@ -6,7 +6,7 @@ Forward-compatible list-based map (hash) functionality for [libsass](https://git
 
 *Some Sass hash.*
 
-##### Update: You can now install this as a Bower package or Compass extension:
+##### Update: You can now install this as a Bower pkg or a Compass gem:
 
 ```sh
 # bower
