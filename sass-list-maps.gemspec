@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   # Release Specific Information
-  s.version = "0.9.0"
+  s.version = "0.9.1"
   s.date = "2014-01-24"
   s.licenses = ['MIT']
 
@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
 
   # Gem Bookkeeping
   s.rubygems_version = %q{1.3.6}
-  s.add_dependency("compass", ["~> 0.12.0compa"])
+  s.add_dependency("compass", ["~> 0.12.0"])
   s.add_dependency("sass", ["~> 3.2.0"])
 end
