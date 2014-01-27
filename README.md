@@ -6,7 +6,7 @@ Forward-compatible list-based map (hash) functionality for [libsass](https://git
 
 *Some Sass hash.*
 
-##### Update: You can now test-drive these functions at [Sassmeister](http://sassmeister.com/). Just set the compiler to Sass 3.2.x or libsass, and include the "Sass List–Maps" library. Also you can install them locally as a Bower pkg or a Compass gem:
+**Update: You can test-drive these functions at [Sassmeister](http://sassmeister.com/). Just set the compiler to Sass 3.2.x or libsass, and include the "Sass List–Maps" library. You can also now install them locally as a Bower pkg or a Compass gem:**
 
 ```sh
 # installation with bower
@@ -196,8 +196,8 @@ There are a few points that bear mentioning/repeating:
 ### To-Dos
 
 * Make a depth-based version of `map-remove()`
-* ~~Make this in to a bower package~~ *done*
-* Make this in to a gem
+* <del>Make this in to a bower package</del> *done*
+* <del>Make this in to a gem</del> *done*
 * Push a native maps version of the 'advanced' functions above
 
 ### Acknowledgements
