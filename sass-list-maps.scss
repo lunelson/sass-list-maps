@@ -14,11 +14,15 @@
 		$output: append($output, nth($list, $i), $sep); }
 	@return $output;
 }
-@function replace-nth($list, $value, $index, $sep: 'comma') {
-	$output: ();
-	@for $i from 1 through length($list) {
-		@if $i == $index { $output: append($output, $value, $sep); }
-		@else { $output: append($output, nth($list, $i), $sep); } }
+
+// updated algorithm, name and syntax for this function
+// now feature-matches sass 3.3's 'set-nth()' function
+@function set-nth($list, $index, $value, $sep: 'comma') {
+	$length: length($list); $output: ();
+	@if $index > $length { @return $list; }
+	@for $i from 1 through $index - 1 { $output: append($output, nth($list, $i), $sep); }
+	$output: append($output, $value, $sep);
+	@for $i from $index + 1 through $length { $output: append($output, nth($list, $i), $sep); }
 	@return $output;
 }
 
@@ -56,7 +60,7 @@
 	$keys1: map-keys($list1);
 	@each $tuple in $list2 {
 		$index: index($keys1, tuple-key($tuple));
-		@if $index { $list1: replace-nth($list1, $tuple, $index); }
+		@if $index { $list1: set-nth($list1, $index, $tuple); }
 		@else { $list1: append($list1, $tuple, 'comma'); } }
 	@return $list1;
 }

@@ -6,7 +6,7 @@ Forward-compatible list-based map (hash) functionality for [libsass](https://git
 
 *Some Sass hash.*
 
-**Update: You can test-drive these functions at [Sassmeister](http://sassmeister.com/). Just set the compiler to Sass 3.2.x or libsass, and include the "Sass List–Maps" library. You can also now install them locally as a Bower pkg or a Compass gem:**
+**Update: You can test-drive these functions at [Sassmeister](http://sassmeister.com/). Just set the compiler to Sass 3.2.x or libsass, and include the "Sass List–Maps" library, or try this [pre-loaded gist](http://sassmeister.com/gist/8645654). You can also now install them locally as a Bower pkg or a Compass gem:**
 
 ```sh
 # installation with bower
