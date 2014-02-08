@@ -1,6 +1,6 @@
 {
   "name": "Sass List–Maps",
-  "description": "Forward-compatible maps for libsass and ruby-sass <3.3",
+  "description": "Forward-compatible maps for libsass and ruby-sass <3.3 using lists",
   "tags": [
     "libsass",
     "sass",

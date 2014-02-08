@@ -1,4 +1,4 @@
-// list helper functions (some from SassyLists)
+// list helper functions
 
 @function list($args...) {
 	$output: ();
@@ -14,7 +14,7 @@
 		$output: append($output, nth($list, $i), $sep); }
 	@return $output;
 }
-@function set-nth($list, $index, $value, $sep: 'comma') { // rewritten and renamed to match sass 3.3 'set-nth()'
+@function set-nth($list, $index, $value, $sep: 'comma') {
 	$length: length($list); $output: ();
 	@if $index > $length or $index <= 0 { @return $list; }
 	@for $i from 1 through $index - 1 { $output: append($output, nth($list, $i), $sep); }
@@ -88,4 +88,16 @@
 			@if $i == $key-length { $old-list: $list; } @else { $old-list: map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or (); }
 			$value: map-merge($old-list, $new-list); } }
 	@return $value;
+}
+
+// aliases: keep it simple stupid
+
+@function get($args...) {
+  @return map-get-z($args...);
+}
+@function merge($args...) {
+  @return map-merge-z($args...);
+}
+@function set($args...) {
+  @return map-merge-z($args...);
 }
