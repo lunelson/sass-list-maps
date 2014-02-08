@@ -14,12 +14,9 @@
 		$output: append($output, nth($list, $i), $sep); }
 	@return $output;
 }
-
-// updated algorithm, name and syntax for this function
-// now feature-matches sass 3.3's 'set-nth()' function
-@function set-nth($list, $index, $value, $sep: 'comma') {
+@function set-nth($list, $index, $value, $sep: 'comma') { // rewritten and renamed to match sass 3.3 'set-nth()'
 	$length: length($list); $output: ();
-	@if $index > $length { @return $list; }
+	@if $index > $length or $index <= 0 { @return $list; }
 	@for $i from 1 through $index - 1 { $output: append($output, nth($list, $i), $sep); }
 	$output: append($output, $value, $sep);
 	@for $i from $index + 1 through $length { $output: append($output, nth($list, $i), $sep); }
