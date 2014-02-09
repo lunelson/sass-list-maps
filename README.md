@@ -118,14 +118,14 @@ $list-map: ( alpha 1, beta 2, gamma 3 );
 
 $list-map: ( alpha 1, beta 2, gamma 3 );
 
-$new-map: map-merge($list-map, list(gamma 4));
+$new-map: map-merge($list-map, zip(gamma, 4));
 // -> $new-map = ( alpha 1, beta 2, gamma 4 )
 
 $short-map: map-remove($list-map, alpha);
 // -> $short-map = ( beta 2, gamma 3)
 ```
 
-**NB**: notice the use of the `list()` function in the second example. This is due to the fact that Sass has no succinct way to create a list containing another list, if the containing list is only 1 element in length. Since a list-map must always be a list-of-lists—even if it only contains one item—you must use the `list()` function (included here) when creating list-maps of only one key-value pair.
+**NB**: notice the use of the `zip()` function in the second example. This is due to the fact that Sass has no way to syntactically write a list containing another list, if the containing list is only 1 element in length. Since a list-map must always be a list-of-lists—even if it only contains one item—you must use the `zip()` function as shown above, when you need to create list-maps with only one key-value pair.
 
 #### Advanced
 
@@ -180,15 +180,21 @@ $new-map4-z: map-merge-z($list-map-z, delta, epsilon, 5);
 // -> ( alpha ( beta ( gamma 3 ) ), ( delta ( epsilon 5 ) ) )
 ```
 
-##### 6. Unified syntax
+##### 6. UNIFIED SYNTAX: `get()`, `merge()`, `set()`
 
-Note that in the above examples, the `-z` suffixed functions work like their 'simple' counterparts if given only two arguments. This is by design, so that they can transparently replace them. Moreover, the `map-merge-z($list, $keys-and-value...)` and `map-merge-z($list1, $list2)` argument patterns are interchangeable. This means that `map-merge-z()` can be treated as if it were `map-set-z($list, $keys..., $value)`, which is a common alternative syntax when dealing with hashes. In light of this, the following aliased functions are provided—as of version 0.9.2—to unify and simplify the usage of map functions as much as is possible:
+Note that in the above 'advanced' examples, the `-z` suffixed functions work like their 'simple' counterparts if given only two arguments, which means they can transparently replace them and will respond to the number of 'key' arguments required. Moreover, `map-merge-z($list, $key[s...], $value)` and `map-merge-z($list1, $list2)` argument patterns are interchangeable, which means that `map-merge-z()` can be treated as if it were `map-set-z()`, which can be a more intuitive semantic. The following aliases are provided—as of version 0.9.2—to unify and simplify all of the above list-map logic to three universal functions:
 
 ```scss
+// get($list, $key[s...])
+// accepts 1 or more key args as target, returns value
 @function get($args...) { @return map-get-z($args...); }
 
+// merge($list1, [$keys...,] $list2)
+// accepts 0 or more key args as target, merges list at target
 @function merge($args...) { @return map-merge-z($args...); }
 
+// set($list, $key[s...], $value)
+// accepts 1 or more key args as target, sets value at target
 @function set($args...) { @return map-merge-z($args...); }
 ```
 
