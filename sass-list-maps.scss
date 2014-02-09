@@ -92,12 +92,6 @@
 
 // aliases: keep it simple stupid
 
-@function get($args...) {
-  @return map-get-z($args...);
-}
-@function merge($args...) {
-  @return map-merge-z($args...);
-}
-@function set($args...) {
-  @return map-merge-z($args...);
-}
+@function get($args...) { @return map-get-z($args...); }
+@function merge($args...) { @return map-merge-z($args...); }
+@function set($args...) { @return map-merge-z($args...); }
