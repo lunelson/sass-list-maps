@@ -4,11 +4,11 @@ Forward-compatible map (hash) functionality for [libsass](https://github.com/hca
 
 ![](sass-hash.jpg)
 
-*Some Sass hash. Not everyone likes this joke somehow.*
+*Some Sass hash. Not everyone likes this joke, somehow.*
 
 ###### Latest Updates
 
-* 0.9.2 -- improved performance with `set-nth()` function
+* 0.9.2 -- improved merge performance with new `set-nth()` function
 * 0.9.2 -- included `get()`, `merge()`, and `set()` aliases by default
 * now listed at the [sache.in](http://www.sache.in/) directory of Sass & Compass Extensions
 
@@ -18,7 +18,7 @@ You can test-drive these functions [at Sassmeister in this pre-loaded gist](http
 
 ###### Install it
 
-Sass List-Maps can now be installed as a Bower component or a gem (Compass extension) as alternative to cloning, downloading or cutting and pasting from this repo:
+Sass List-Maps can be installed as a Bower component or a gem (Compass extension) as alternative to cloning, downloading or cutting and pasting from this repo:
 
 ```sh
 # installation with bower
@@ -212,4 +212,4 @@ There are a few points that bear mentioning/repeating:
 
 First and foremost, gratitude to the core Sass devs (@nex3 and @chriseppstein) for their tireless advancement of the gold-standard of CSS pre-processing, and secondly to @jedfoster and @anotheruiguy for [Sassmeister](http://sassmeister.com/), which makes developing complex functions and mixins relatively painless.
 
-Also acknowledgements to @HugoGiraudel for [SassyLists](http://sassylists.com/), from which I borrowed some functions early on, and especially `debug()`, without which I would not have been able to figure out what was going on (and going wrong) in ruby-sass 3.2 and libsass.
+Also acknowledgements to @HugoGiraudel for [SassyLists](http://sassylists.com/), from which I adapted some functions, and especially for his `debug()`, without which I would not have been able to figure out what was going on (and going wrong) in ruby-sass 3.2.x and libsass.
