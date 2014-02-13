@@ -1,5 +1,11 @@
 // list helper functions
+// 0.9.3 -- "list()" now deprecated in favor of "zip()".
 
+@function list($args...) {
+	$output: ();
+	@each $arg in $args { $output: append($output, $arg); }
+	@return $output;
+}
 @function slice($list, $start: 1, $end: length($list), $sep: 'comma') {
 	$output: ();
 	@for $i from $start through $end {
@@ -15,10 +21,13 @@
 	@return $output;
 }
 
-// list-map helper functions, purely semantic
+// list-map helper functions
+// 0.9.3 -- key() and value() tentatively added as alternatives to 'tuple-' named funcs
 
 @function tuple-key($tuple) { @return nth($tuple, 1); }
 @function tuple-value($tuple) { @return nth($tuple, 2); }
+@function key($tuple) { @return nth($tuple, 1); }
+@function value($tuple) { @return nth($tuple, 2); }
 
 // list-map versions of map-keys(), -values() and -has-key() functions
 
@@ -60,7 +69,7 @@
 	@return $out;
 }
 
-// advanced: map-get-z() and map-merge-z()
+// deep/nested map functions: map-get-z() and map-merge-z()
 
 @function map-get-z($list, $keys...) {
 	@each $key in $keys {
@@ -82,7 +91,8 @@
 	@return $value;
 }
 
-// aliases: keep it simple stupid
+// 0.9.2 -- aliases
+// these replace map-*() and map-*-z() variants with a single universal function
 
 @function get($args...) { @return map-get-z($args...); }
 @function merge($args...) { @return map-merge-z($args...); }

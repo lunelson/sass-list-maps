@@ -1,14 +1,15 @@
 ## Sass List–Maps
 
-Forward-compatible map (hash) functionality for [libsass](https://github.com/hcatlin/libsass) and [ruby-sass](http://sass-lang.com/) < 3.3.x using lists.
+Forward-compatible map (hash) functionality for [libsass](https://github.com/hcatlin/libsass) and [ruby-sass](http://sass-lang.com/) 3.2.x using lists.
 
 ![](sass-hash.jpg)
 
-*Some Sass hash. Not everyone likes this joke, somehow.*
+*Some Sass hash. Not everyone likes this joke.*
 
 ###### Latest Updates
 
-* 0.9.2 -- improved merge performance with new `set-nth()` function
+* 0.9.3 -- deprecated `list()` function in favor of native `zip()` for creating single-pair list-maps
+* 0.9.2 -- improved merge performance with rewritten `set-nth()` function
 * 0.9.2 -- included `get()`, `merge()`, and `set()` aliases by default
 * now listed at the [sache.in](http://www.sache.in/) directory of Sass & Compass Extensions
 
@@ -125,11 +126,11 @@ $short-map: map-remove($list-map, alpha);
 // -> $short-map = ( beta 2, gamma 3)
 ```
 
-**NB**: notice the use of the `zip()` function in the second example. This is due to the fact that Sass has no way to syntactically write a list containing another list, if the containing list is only 1 element in length. Since a list-map must always be a list-of-lists—even if it only contains one item—you must use the `zip()` function as shown above, when you need to create list-maps with only one key-value pair.
+**NB**: notice the use of the `zip()` function in the second example. This is used because Sass has no way to create a list containing a single item that is also a list, using notation alone. For list-maps with only one pair therefore, we use the `zip()` function to combine its arguments in to a list of pairs.
 
 #### Advanced
 
-In addition to the core ruby-sass 3.3+ map functions, this repo includes 'depth' versions of `map-get()` and `map-merge()`, suffixed here with `-z`.
+In addition to the core ruby-sass 3.3+ map functions, this library includes 'depth' or 'nested' versions of `map-get()` and `map-merge()` -- suffixed here with `-z`.
 
 ##### 4. `map-get-z($list, $keys...)`
 
@@ -155,7 +156,7 @@ $list-map-z: (
 
 ##### 5. `map-merge-z($list, $keys-and-value...)`
 
-The `map-merge-z()` function takes a chain of keys to indicate where (at what depth) to merge, interpreting its final argument as the value to be merged. This value can be of any type including another list/list-map. Note that if only one key/value argument is passed and it is not a list, it is interpreted as the key, and an empty list is merged in as the value:
+The `map-merge-z()` function takes a chain of keys to indicate where (at what depth) to merge, and takes its final argument as the value to be merged. This value can be of any type including another list/list-map. Note that if only one key/value argument is passed and it is not a list, it is interpreted as the key, and an empty list is merged in as the value:
 
 ```scss
 @import "sass-list-maps";
@@ -185,6 +186,8 @@ $new-map4-z: map-merge-z($list-map-z, delta, epsilon, 5);
 Note that in the above 'advanced' examples, the `-z` suffixed functions work like their 'simple' counterparts if given only two arguments, which means they can transparently replace them and will respond to the number of 'key' arguments required. Moreover, `map-merge-z($list, $key[s...], $value)` and `map-merge-z($list1, $list2)` argument patterns are interchangeable, which means that `map-merge-z()` can be treated as if it were `map-set-z()`, which can be a more intuitive semantic. The following aliases are provided—as of version 0.9.2—to unify and simplify all of the above list-map logic to three universal functions:
 
 ```scss
+@import "sass-list-maps";
+
 // get($list, $key[s...])
 // accepts 1 or more key args as target, returns value
 @function get($args...) { @return map-get-z($args...); }
@@ -202,20 +205,18 @@ Note that in the above 'advanced' examples, the `-z` suffixed functions work lik
 
 There are a few points that bear mentioning/repeating:
 
-* operating on global variables in libsass and in ruby-sass versions before 3.3.x works differently than in 3.3+. You can make changes to global variables from inside a mixin scope but you can't create them from there. This has implications for mixins that do operations on global list-maps.
-* as noted, the 'list-map' syntax is less forgiving than that of native maps (watch the commas). Also, it lacks any error-checking (e.g. native maps will produce a warning if you have duplicate keys). And obviously fancy features of native maps such as passing a map to a function in the form `my-function($map...)` whereupon you can reference the key/value elements inside the function as if they were named variables, doesn't work with list-maps.
-* as noted, the `list()` function is required if you want to make a list-map with only one pair, since Sass has no short way of specifying a list of a list like that (e.g. `$list: ((key value));` doesn't work, you need `$list: list(key value);`).
-* as of this writing, this code contains no test-suites or inline error-catches or warnings of any kind. I've been using it in my own work but there are surely edge-cases I haven't seen. I welcome reports and contributions.
+* operating on global variables in libsass and in ruby-sass 3.2.x or earlier, works differently than in 3.3.x+: You can make changes to global variables from inside a mixin scope but you can't create them from there. There is no `!global` flag. This has implications for mixins that operate on global list-maps.
+* as noted, the 'list-map' syntax is less forgiving than that of native maps (watch your commas). Also, it lacks any error-checking (e.g. native maps will produce a warning if you have duplicate keys). And obviously fancy features of native maps such as passing a map to a function in the form `my-function($map...)` whereupon you can reference the key/value elements inside the function as if they were named variables, doesn't work with list-maps.
+* as noted, the `zip()` function is required if you want to make a list-map with only one pair, since Sass has no short way of specifying a list with one list inside (e.g. `$list: ((key value));` doesn't work, you need `$list: zip(key, value);`).
+* as of this writing, this code contains no test-suites or inline error-catches or warnings of any kind. I've been using it in my own work but there are surely edge-cases I haven't seen. I welcome reports and contributions!
 
 ### To-Dos
 
 * Make a depth-based version of `map-remove()`
-* <del>Make this in to a bower package</del> *done*
-* <del>Make this in to a gem</del> *done*
 * Push a native maps version of the 'advanced' functions above
 
 ### Acknowledgements
 
 First and foremost, gratitude to the core Sass devs (@nex3 and @chriseppstein) for their tireless advancement of the gold-standard of CSS pre-processing, and secondly to @jedfoster and @anotheruiguy for [Sassmeister](http://sassmeister.com/), which makes developing complex functions and mixins relatively painless.
 
-Also acknowledgements to @HugoGiraudel for [SassyLists](http://sassylists.com/), from which I adapted some functions, and especially for his `debug()`, without which I would not have been able to figure out what was going on (and going wrong) in ruby-sass 3.2.x and libsass.
+Also acknowledgements to @HugoGiraudel for [SassyLists](http://sassylists.com/), from which I adapted some early functions, and especially for his list `debug()` function, without which I would not have been able to figure out what was going on (and going wrong) in ruby-sass 3.2.x and libsass.
