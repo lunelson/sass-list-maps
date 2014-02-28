@@ -7,7 +7,7 @@ Forward-compatible map (hash) functionality for [libsass](https://github.com/hca
 ###### Latest Updates
 
 * 0.9.5 -- now handles single-pair lists automatically. This means no more need for `list()` or `zip()` functions, which are now deprecated.
-* 0.9.3 -- <del>deprecated `list()` function in favor of native `zip()` for creating single-pair list-maps</del> this was the best
+* 0.9.3 -- <del>deprecated `list()` function in favor of native `zip()` for creating single-pair list-maps</del>
 * 0.9.2 -- improved merge performance with rewritten `set-nth()` function
 * 0.9.2 -- included `get()`, `merge()`, and `set()` aliases by default
 * now listed at the [sache.in](http://www.sache.in/) directory of Sass & Compass Extensions
