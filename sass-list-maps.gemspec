@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   # Release Specific Information
-  s.version = "0.9.3"
-  s.date = "2014-01-24"
+  s.version = "0.9.5"
+  s.date = "2014-02-28"
   s.licenses = ['MIT']
 
   # Gem Details
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/lunelson/sass-list-maps"
 
   # Gem Files
-  s.files = Dir['README.md','LICENSE','sass-list-maps.scss']
+  s.files = Dir['README.md','LICENSE','_sass-list-maps.scss']
   s.files += Dir.glob("lib/**/*.*")
 
   # Gem Bookkeeping
