@@ -26,6 +26,7 @@
     "node_modules",
     "bower_components",
     "test*",
-    "sass-hash.jpg"
+    "sass-hash.jpg",
+    "sass-list-maps.todo"
   ]
 }
