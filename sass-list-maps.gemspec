@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   # Release Specific Information
-  s.version = "0.9.6"
+  s.version = "0.9.7"
   s.date = "2014-03-03"
   s.licenses = ['MIT']
 
