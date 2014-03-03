@@ -122,9 +122,9 @@
 
 // aliases added as of 0.9.2: unify and replace map-*() and map-*-z() variants
 
-@function get($args...) { @return list-map-get-z($args...); }
-@function merge($args...) { @return list-map-merge-z($args...); }
-@function set($args...) { @return list-map-merge-z($args...); }
+@function get($args...) { @return map-get-z($args...); }
+@function merge($args...) { @return map-merge-z($args...); }
+@function set($args...) { @return map-merge-z($args...); }
 
 // new as of 0.9.5: map-inspect()
 // experimental
