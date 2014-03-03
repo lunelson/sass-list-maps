@@ -24,11 +24,12 @@
 
 // list-map helper functions
 // 0.9.3 -- key() and value() tentatively added as alternatives to 'tuple-' named funcs
+// 0.9.6 -- added better error handling; aliased to single version of each
 
-@function tuple-key($tuple) { @return nth($tuple, 1); }
-@function tuple-value($tuple) { @return nth($tuple, 2); }
-@function key($tuple) { @return nth($tuple, 1); }
-@function value($tuple) { @return nth($tuple, 2); }
+@function tuple-key($tuple) { @if length($tuple) < 1 { @return null; } @else { @return nth($tuple, 1); } }
+@function tuple-value($tuple) { @if length($tuple) < 2 { @return null; } @else { @return nth($tuple, 2); } }
+@function key($tuple) { @return tuple-key($tuple); }
+@function value($tuple) { @return tuple-value($tuple); }
 
 // 0.9.5 -- added list-map-check()
 
