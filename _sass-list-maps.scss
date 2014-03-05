@@ -58,11 +58,11 @@
 }
 @function map-prev-key($list, $key) {
   $list: list-map-check($list); $keys: map-keys($list);
-  @return nth($keys, index($keys, $key) - 1)
+  @return nth($keys, index($keys, $key) - 1);
 }
 @function map-next-key($list, $key) {
   $list: list-map-check($list); $keys: map-keys($list);
-  @return nth($keys, index($keys, $key) + 1)
+  @return nth($keys, index($keys, $key) + 1);
 }
 
 // list-map versions of list-map-get(), -merge() and -remove()
