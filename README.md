@@ -175,7 +175,7 @@ $new-map1-z: map-merge-z($list-map-z, delta);
 // -> ( alpha ( beta ( gamma 3 ) ), ( delta ( ) ) )
 $new-map2A-z: map-merge-z($list-map-z, delta, epsilon);
 // -> ( alpha ( beta ( gamma 3 ) ), ( delta epsilon ) )
-$new-map2B-z: map-merge-z($list-map-z, list(delta epsilon));
+$new-map2B-z: map-merge-z($list-map-z, (delta epsilon));
 // -> ( alpha ( beta ( gamma 3 ) ), ( delta epsilon ) )
 $new-map3-z: map-merge-z($list-map-z, (delta 4, epsilon 5));
 // -> ( alpha ( beta ( gamma 3 ) ), ( delta 4 ), ( epsilon 5 ) )
