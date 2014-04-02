@@ -6,9 +6,8 @@ Forward-compatible map (hash) functionality for [libsass](https://github.com/hca
 
 #### Latest Updates
 
-* 0.9.6-0.9.8 -- argument handling enhancements; bugfixes due to typos
-* 0.9.5 -- now handles single-pair lists automatically. This means no more need for `list()` or `zip()` functions, which are now deprecated.
-* 0.9.3 -- <del>deprecated `list()` function in favor of native `zip()` for creating single-pair list-maps</del>
+* 0.9.6-0.9.8 -- argument-handling enhancements; typo fixes
+* 0.9.3-0.9.5 -- now handles single-pair lists automatically. This means no more need for `list()` or `zip()` functions, which are now deprecated.
 * 0.9.2 -- improved merge performance with rewritten `set-nth()` function
 * 0.9.2 -- included `get()`, `merge()`, and `set()` aliases by default
 * now listed at the [sache.in](http://www.sache.in/) directory of Sass & Compass Extensions
@@ -19,13 +18,13 @@ You can test-drive these functions [at Sassmeister in this pre-loaded gist](http
 
 #### Install it
 
-Sass List-Maps can be installed as a Bower component or a gem (Compass extension):
+Sass List-Maps can be installed as a Bower component for (see [node-sass options](http://github.com/sindresorhus/grunt-sass#includepaths) if you are using libsass via node) or as a gem-based Compass extension for ruby setups:
 
 ```sh
 # installation with bower
 bower install sass-list-maps
 
-# run with Grunt-Sass
+# run with grunt-sass using these options
 options: {
   includePaths: [
     './bower_components/sass-list-maps'
