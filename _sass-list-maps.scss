@@ -128,7 +128,6 @@
 @function set($args...) { @return map-merge-z($args...); }
 
 // new as of 0.9.5: map-inspect()
-// experimental
 
 @function map-inspect($list...) {
   @if length($list) == 1 { $list: list-map-check($list...); }
@@ -147,3 +146,30 @@
   }
   @return $output + ')';
 }
+
+// new as of 0.9.9: map-pretty()
+
+@function map-pretty($list, $level: 1) {
+  @if length($list) == 1 { $list: list-map-check($list...); }
+  @else { $list: list-map-check($list); }
+  $indent: $tab; $outdent: $tab;
+  @for $n from 1 through $level { $indent: $indent + $tab; }
+  @for $n from 1 through $level - 1 { $outdent: $outdent + $tab; }
+  $output: '(' + $cr + $indent; $i: 1;
+  @each $tuple in $list {
+    @if length($tuple) != 2 {
+      $output: $output + '#{$tuple}'; }
+    @else {
+      $key: nth($tuple, 1); $value: nth($tuple, 2);
+      @if type-of($value) == 'list' { $output: $output + '#{$key} #{map-pretty($value, $level+1)}'; }
+      @else { $output: $output + '#{$key} #{$value}'; } }
+    @if $i < length(map-keys($list)) { $output: $output + ',' + $cr + $indent; }
+    $i: $i + 1;
+  }
+  // @return unquote($output + $cr + $outdent + ')'); // replace last line with this one for unquoted output in libsass
+  @return $output + $cr + $outdent + ')';
+}
+// aliases of above
+@function map-inspect-pretty($list...) { @return map-pretty($list...); }
+@function map-inspect-p($list...) { @return map-pretty($list...); }
+

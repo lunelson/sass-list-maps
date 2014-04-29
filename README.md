@@ -1,25 +1,25 @@
 ## Sass List–Maps
 
-Forward-compatible map (hash) functionality for [libsass](https://github.com/hcatlin/libsass) and [ruby-sass](http://sass-lang.com/) 3.2.x using lists.
+These functions provide forward-compatible map (hash) data-type functionality for [libsass](https://github.com/hcatlin/libsass) and [ruby-sass](http://sass-lang.com/) 3.2.x using the native list data-type. They feature-match all the current native (ruby-sass 3.3.x) map functions as well as adding 'deep' or 'chained' `get`, `set` and `merge` functionality.
 
 ![](sass-hash.jpg)
 
 ###### Latest Updates
 
-* 0.9.6-0.9.8 -- argument handling enhancements; bugfixes due to typos
-* 0.9.5 -- now handles single-pair lists automatically. This means no more need for `list()` or `zip()` functions, which are now deprecated.
-* 0.9.3 -- <del>deprecated `list()` function in favor of native `zip()` for creating single-pair list-maps</del>
-* 0.9.2 -- improved merge performance with rewritten `set-nth()` function
+* 0.9.9 -- added `map-pretty()` function to inspect/debug list-maps in pretty-printed form
+* 0.9.6-0.9.8 -- argument handling enhancements; bugfixes
+* 0.9.3-0.9.5 -- handling single-pair lists automatically. This means no more need for `list()` or `zip()` functions, which are now deprecated.
+* 0.9.2 -- improved merge performance with new `set-nth()` function
 * 0.9.2 -- included `get()`, `merge()`, and `set()` aliases by default
-* now listed at the [sache.in](http://www.sache.in/) directory of Sass & Compass Extensions
+* 0.9.1 -- now listed at the [sache.in](http://www.sache.in/) directory of Sass & Compass Extensions
 
-###### Try it out
+###### Try it
 
-You can test-drive these functions [at Sassmeister in this pre-loaded gist](http://sassmeister.com/gist/8645654). NB: the libsass version at Sassmeister might be a couple of point-releases behind this repo.
+You can test-drive these functions at [Sassmeister, in this pre-loaded gist](http://sassmeister.com/gist/8645654)—but note that the libsass version at Sassmeister might be a couple of point-releases behind this repo.
 
 ###### Install it
 
-Sass List-Maps can be installed as a Bower component or a gem (Compass extension):
+The 'Sass List-Maps' can be downloaded, cut-and-pasted, installed as a Bower component, or as a gem (Compass extension). For the latter two options, see the following:
 
 ```sh
 # installation with bower
