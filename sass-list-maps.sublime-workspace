@@ -517,15 +517,20 @@
 			]
 		]
 	},
-	"buffers":
-	[
-	],
 	"build_system": "",
 	"command_palette":
 	{
 		"height": 400.0,
 		"selected_items":
 		[
+			[
+				"case",
+				"Convert Case: Title Case"
+			],
+			[
+				"marke",
+				"Marked"
+			],
 			[
 				"db",
 				"DocBlockr: Decorate line comment"
@@ -1029,14 +1034,6 @@
 			[
 				"coffee",
 				"Coffee: Check Syntax"
-			],
-			[
-				"install ",
-				"Package Control: Install Package"
-			],
-			[
-				"ssjq",
-				"Set Syntax: jQuery (JavaScript)"
 			]
 		],
 		"width": 601.0
@@ -1305,6 +1302,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"example of ",
+			"of ",
+			"example",
 			"$phi, ",
 			"tscale",
 			"20px",
@@ -1429,10 +1429,7 @@
 			"query",
 			"$uid",
 			"$typo-alias",
-			"$uid-or-typo-alias",
-			"ts-get",
-			"$typo-alias",
-			"$alias"
+			"$uid-or-typo-alias"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1575,14 +1572,6 @@
 		"whole_word": false,
 		"wrap": true
 	},
-	"groups":
-	[
-		{
-			"sheets":
-			[
-			]
-		}
-	],
 	"incremental_find":
 	{
 		"height": 27.0
@@ -1626,7 +1615,6 @@
 	{
 		"height": 247.0
 	},
-	"project": "sass-list-maps.sublime-project",
 	"replace":
 	{
 		"height": 50.0
@@ -1930,7 +1918,7 @@
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 327.0,
 	"status_bar_visible": true,
 	"template_settings":
