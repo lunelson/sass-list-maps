@@ -2,7 +2,7 @@
 
 Forward-compatible map (hash) functionality for [libsass](https://github.com/hcatlin/libsass) and [ruby-sass](http://sass-lang.com/) 3.2.x using lists.
 
-![](sass-hash.jpg)
+![](/sass-hash.jpg)
 
 #### Latest Updates
 
