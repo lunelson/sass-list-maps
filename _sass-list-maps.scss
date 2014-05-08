@@ -148,7 +148,9 @@
 }
 
 // new as of 0.9.9: map-pretty()
-
+$cr: '
+'; 
+$tab: '  ';
 @function map-pretty($list, $level: 1) {
   @if length($list) == 1 { $list: list-map-check($list...); }
   @else { $list: list-map-check($list); }
