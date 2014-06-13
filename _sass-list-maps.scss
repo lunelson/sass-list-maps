@@ -67,10 +67,12 @@
   @return nth($tuple, 2);
 }
 
+// Alias for `tuple-key`
 @function key($tuple) { 
   @return tuple-key($tuple);
 }
 
+// Alias for `tuple-value`
 @function value($tuple) {
   @return tuple-value($tuple);
 }
@@ -91,14 +93,7 @@
 // 0.9.5 -- added map-prev-key() and map-next-key() functions
 
 @function map-keys($list...) {
-  @if length($list) == 1 {
-    $list: list-map-check($list...);
-  }
-  
-  @else {
-    $list: list-map-check($list);
-  } 
-  
+  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $output: ();
   
   @each $tuple in $list {
@@ -109,14 +104,7 @@
 }
 
 @function map-values($list...) {
-  @if length($list) == 1 {
-    $list: list-map-check($list...);
-  }
-  
-  @else {
-    $list: list-map-check($list);
-  } 
-  
+  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $output: ();
   
   @each $tuple in $list {
@@ -179,14 +167,7 @@
   
   @each $tuple in $list2 {
     $index: index($keys1, tuple-key($tuple));
-    
-    @if $index {
-      $list1: set-nth($list1, $index, $tuple);
-    }
-    
-    @else {
-      $list1: append($list1, $tuple, 'comma');
-    }
+    $list1: if($index, set-nth($list1, $index, $tuple), append($list1, $tuple, 'comma'));
   }
     
   @return $list1;
@@ -211,7 +192,7 @@
 
 @function map-get-z($list, $keys...) {
   @if $list == null {
-    @return null;
+    @return $list;
   }
   
   $length: length($keys);
@@ -220,7 +201,7 @@
   @if $length > 1 {
     @for $n from 2 through $length {
       @if $list == null {
-        @return null;
+        @return $list;
       }
       
       $list: map-get($list, nth($keys, $n), false);
@@ -251,25 +232,8 @@
     }
     
     @for $i from $start through $key-length {
-      $new-list: (); 
-      $old-list: ();
-      
-      @if $i == 0 { 
-        $new-list: $value;
-      }
-      
-      @else {
-        $new-list: append((), nth($keys-and-value, $key-length + 1 - $i) $value, 'comma');
-      }
-      
-      @if $i == $key-length {
-        $old-list: $list;
-      } 
-      
-      @else {
-        $old-list: map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or ();
-      }
-      
+      $new-list: if($i == 0, $value, append((), nth($keys-and-value, $key-length + 1 - $i) $value, 'comma')); 
+      $old-list: if($i == $key-length, $list, map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or ());
       $value: map-merge($old-list, $new-list); 
     } 
   }
@@ -277,16 +241,17 @@
   @return $value;
 }
 
-// aliases added as of 0.9.2: unify and replace map-*() and map-*-z() variants
-
+// [0.9.2] Alias for `map-get-z`
 @function get($args...) {
   @return map-get-z($args...);
 }
 
+// [0.9.2] Alias for `map-merge-z`
 @function merge($args...) {
   @return map-merge-z($args...);
 }
 
+// [0.9.2] Alias for `map-merge-z`
 @function set($args...) {
   @return map-merge-z($args...);
 }
@@ -294,15 +259,9 @@
 // new as of 0.9.5: map-inspect()
 
 @function map-inspect($list...) {
-  @if length($list) == 1 { 
-    $list: list-map-check($list...);
-  }
-  
-  @else {
-    $list: list-map-check($list);
-  }
-  
-  $output: '('; $i: 1;
+  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
+  $output: '('; 
+  $i: 1;
   
   @each $tuple in $list {
     @if length($tuple) != 2 {
@@ -312,14 +271,7 @@
     @else {
       $key: nth($tuple, 1);
       $value: nth($tuple, 2);
-      
-      @if type-of($value) == 'list' { 
-        $output: $output + '#{$key} #{map-inspect($value)}';
-      }
-      
-      @else {
-        $output: $output + '#{$key} #{$value}';
-      }
+      $output: $output + '#{$key} ' + if(type-of($value) == 'list', '#{map-inspect($value)}', '#{$value}');
     }
     
     @if $i < length(map-keys($list)) {
@@ -338,25 +290,19 @@ $cr: '
 $tab: '  ';
 
 @function map-pretty($list, $level: 1) {
-  @if length($list) == 1 {
-    $list: list-map-check($list...);
-  }
-  
-  @else {
-    $list: list-map-check($list);
-  }
-  
+  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $indent: $tab; $outdent: $tab;
   
   @for $n from 1 through $level {
     $indent: $indent + $tab;
+    
+    @if $i < $level {
+      $outdent: $outdent + $tab;
+    }
   }
-  
-  @for $n from 1 through $level - 1 {
-    $outdent: $outdent + $tab;
-  }
-  
-  $output: '(' + $cr + $indent; $i: 1;
+
+  $output: '(' + $cr + $indent; 
+  $i: 1;
   
   @each $tuple in $list {
     @if length($tuple) != 2 {
@@ -365,14 +311,7 @@ $tab: '  ';
     
     @else {
       $key: nth($tuple, 1); $value: nth($tuple, 2);
-      
-      @if type-of($value) == 'list' {
-        $output: $output + '#{$key} #{map-pretty($value, $level+1)}';
-      }
-      
-      @else {
-        $output: $output + '#{$key} #{$value}';
-      }
+      $output: $output + '#{$key} ' + if(type-of($value) == 'list', '#{map-pretty($value, $level+1)}', '#{$value}');
     }
     
     @if $i < length(map-keys($list)) {
@@ -385,11 +324,12 @@ $tab: '  ';
   @return $output + $cr + $outdent + ')';
 }
 
-// aliases of above
+// Alias for `map-pretty`
 @function map-inspect-pretty($list...) {
   @return map-pretty($list...);
 }
 
+// Alias for `map-pretty`
 @function map-inspect-p($list...) {
   @return map-pretty($list...);
 }
