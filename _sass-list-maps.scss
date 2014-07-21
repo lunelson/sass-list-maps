@@ -271,7 +271,7 @@
     $index: index($keys1, tuple-key($tuple));
 
     @if $index { $list1: set-nth($list1, $index, $tuple); }
-    @else { $list1: append($list1, $tuple, 'comma'); } }
+    @else { $list1: append($list1, $tuple, 'comma'); }
   }
 
   @return $list1;
