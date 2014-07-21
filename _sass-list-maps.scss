@@ -154,11 +154,22 @@
   @return $list;
 }
 
+//  88                                  88
+//  88                                  ""
+//  88
+//  88,dPPYba,   ,adPPYYba,  ,adPPYba,  88   ,adPPYba,
+//  88P'    "8a  ""     `Y8  I8[    ""  88  a8"     ""
+//  88       d8  ,adPPPPP88   `"Y8ba,   88  8b
+//  88b,   ,a8"  88,    ,88  aa    ]8I  88  "8a,   ,aa
+//  8Y"Ybbd8"'   `"8bbdP"Y8  `"YbbdP"'  88   `"Ybbd8"'
+
 /////////////////////////////////////////////////////////////////////////
 // list-map versions of map-keys(), -values() and -has-key() functions //
 /////////////////////////////////////////////////////////////////////////
 
 // map-keys(): return comma-separated list of keys from map [conformant with rubysass map-keys()]
+// ---
+// @alias keys()
 // ---
 // [0.9.5] use list-map-check to handle single pairs automatically
 // ---
@@ -178,7 +189,11 @@
   @return $output;
 }
 
+@function keys($list...) { @return map-keys($list...); }
+
 // map-values(): return comma-separated list of values from map [conformant with rubysass map-values()]
+// ---
+// @alias values()
 // ---
 // [0.9.5] use list-map-check to handle single pairs automatically
 // ---
@@ -198,7 +213,11 @@
   @return $output;
 }
 
+@function values($list...) { @return map-values($list...); }
+
 // map-has-key(): check whether key exists in map at root level [conformant with rubysass map-has-key()]
+// ---
+// @alias has-key()
 // ---
 // @param [list] $list: list to check
 // @param [literal] $key: key to check in list
@@ -210,6 +229,7 @@
   $list: list-map-check($list);
 
   @each $tuple in $list {
+
     @if tuple-key($tuple) == $key {
       @return true;
     }
@@ -217,6 +237,8 @@
 
   @return false;
 }
+
+@function has-key($list, $key) { @return map-has-key($list, $key); }
 
 ////////////////////////////////////////////////////////////
 // list-map versions of map-get(), -merge() and -remove() //
@@ -299,6 +321,15 @@
 
   @return $output;
 }
+
+//                       88                                                                         88
+//                       88                                                                         88
+//                       88                                                                         88
+//  ,adPPYYba,   ,adPPYb,88  8b       d8  ,adPPYYba,  8b,dPPYba,    ,adPPYba,   ,adPPYba,   ,adPPYb,88
+//  ""     `Y8  a8"    `Y88  `8b     d8'  ""     `Y8  88P'   `"8a  a8"     ""  a8P_____88  a8"    `Y88
+//  ,adPPPPP88  8b       88   `8b   d8'   ,adPPPPP88  88       88  8b          8PP"""""""  8b       88
+//  88,    ,88  "8a,   ,d88    `8b,d8'    88,    ,88  88       88  "8a,   ,aa  "8b,   ,aa  "8a,   ,d88
+//  `"8bbdP"Y8   `"8bbdP"Y8      "8"      `"8bbdP"Y8  88       88   `"Ybbd8"'   `"Ybbd8"'   `"8bbdP"Y8
 
 //////////////////////////////////////////////////////////////
 // deep/nested map functions: map-get-z() and map-merge-z() //
@@ -394,6 +425,14 @@
 @function merge($args...) { @return map-merge-z($args...); }
 @function set($args...) { @return map-merge-z($args...); }
 
+//                             ,d
+//                             88
+//   ,adPPYba,  8b,     ,d8  MM88MMM  8b,dPPYba,  ,adPPYYba,  ,adPPYba,
+//  a8P_____88   `Y8, ,8P'     88     88P'   "Y8  ""     `Y8  I8[    ""
+//  8PP"""""""     )888(       88     88          ,adPPPPP88   `"Y8ba,
+//  "8b,   ,aa   ,d8" "8b,     88,    88          88,    ,88  aa    ]8I
+//   `"Ybbd8"'  8P'     `Y8    "Y888  88          `"8bbdP"Y8  `"YbbdP"'
+
 /////////////////////////////////////
 // additional map helper functions //
 /////////////////////////////////////
@@ -474,6 +513,7 @@
 // [0.9.9] added
 // ---
 // @alias `map-inspect-pretty`, `map-inspect-p`
+// ---
 // @param [list] $list: map
 // @param [number] $level (1): internal variable, do not touch
 // ---
@@ -558,27 +598,52 @@ $list-map-sort-dir: 'asc';
   @return $list-map;
 }
 
+// map-json(): return json string representation of a map
+// ---
+// [1.0.0] added
+// ---
+// @param [list] $list: map
+// @param [number] $level (1): internal variable, do not touch
+// ---
+// @return [string]
 
 @function map-json($list...) {
-  @if length($list) == 1 { $list: list-map-check($list...); }
-  @else { $list: list-map-check($list); }
+
+  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $output: '{ '; $i: 1;
+
   @each $tuple in $list {
+
     @if length($tuple) != 2 {
-      $output: $output + '#{$tuple}'; }
+      $output: $output + '#{$tuple}';
+    }
+
     @else {
+
       $key: nth($tuple, 1);
       $value: nth($tuple, 2);
-      @if type-of($value) == 'list' { $output: $output + '"#{$key}": #{map-json($value)}'; }
+
+      @if type-of($value) == 'list' {
+        $output: $output + '"#{$key}": #{map-json($value)}';
+      }
+
       @else if type-of($value) == 'number' {
         $value: if(unitless($value), $value, '"#{$value}"');
-        $output: $output + '"#{$key}": #{$value}'; }
+        $output: $output + '"#{$key}": #{$value}';
+      }
+
       @else {
         $value: if(type-of($value) == 'bool', $value, '"#{$value}"');
-        $output: $output + '"#{$key}": #{$value}'; }
+        $output: $output + '"#{$key}": #{$value}';
+      }
     }
-    @if $i < length(map-keys($list)) { $output: $output + ', '; }
+
+    @if $i < length(map-keys($list)) {
+      $output: $output + ', ';
+    }
+
     $i: $i + 1;
   }
+
   @return $output + ' }';
 }

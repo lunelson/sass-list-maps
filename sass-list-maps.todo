@@ -1,3 +1,9 @@
--	test new code in sassmeister w 3.3 or even with 'true'
--	change sort-at and values-at to different argument order
--	rename sort to quicksort, and sort-at to sort
+- test and document sort and json functions
+- test that slice function
+- test all inspection functions
+- add sensible aliases
+	- keys
+	- values
+	- etc
+- do depth version of map-remove-z and alias to remove()
+- add error handling @warn framework
