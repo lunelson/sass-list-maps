@@ -1,18 +1,18 @@
-//
-//  88  88
-//  88  ""               ,d
-//  88                   88
-//  88  88  ,adPPYba,  MM88MMM         88,dPYba,,adPYba,   ,adPPYYba,  8b,dPPYba,   ,adPPYba,
-//  88  88  I8[    ""    88  aaaaaaaa  88P'   "88"    "8a  ""     `Y8  88P'    "8a  I8[    ""
-//  88  88   `"Y8ba,     88  """"""""  88      88      88  ,adPPPPP88  88       d8   `"Y8ba,
-//  88  88  aa    ]8I    88,           88      88      88  88,    ,88  88b,   ,a8"  aa    ]8I
-//  88  88  `"YbbdP"'    "Y888         88      88      88  `"8bbdP"Y8  88`YbbdP"'   `"YbbdP"'
-//                                                                     88
-//                                                                     88
 //  Sass List-Maps 1.0.0
 //  a libsass polyfill for rubysass "maps" data-type -- using lists
 //  by @lunelson
 //  MIT License
+
+//
+//                        88  88  88           88
+//                 ,d     ""  88  ""    ,d     ""
+//                 88         88        88
+//  88       88  MM88MMM  88  88  88  MM88MMM  88   ,adPPYba,  ,adPPYba,
+//  88       88    88     88  88  88    88     88  a8P_____88  I8[    ""
+//  88       88    88     88  88  88    88     88  8PP"""""""   `"Y8ba,
+//  "8a,   ,a88    88,    88  88  88    88,    88  "8b,   ,aa  aa    ]8I
+//   `"YbbdP'Y8    "Y888  88  88  88    "Y888  88   `"Ybbd8"'  `"YbbdP"'
+//
 
 ///////////////////////////
 // list helper functions //
@@ -46,9 +46,8 @@
 // ---
 // @return [list]
 
-@function slice($list, $start: 1, $end: null, $sep: 'comma') {
+@function slice($list, $start: 1, $end: length($list), $sep: 'comma') {
 
-  $end: $end or length($list);
   $output: ();
 
   @for $i from $start through $end {
@@ -114,7 +113,6 @@
   @return nth($tuple, 1);
 }
 
-// alias
 @function key($tuple) { @return tuple-key($tuple); }
 
 // tuple-value(): return the value (second value) from a tuple (pair)
@@ -134,7 +132,6 @@
   @return nth($tuple, 2);
 }
 
-// alias
 @function value($tuple) { @return tuple-value($tuple); }
 
 // list-map-check(): return list-map from list; ensure input list-maps are lists-of-lists
@@ -154,14 +151,13 @@
   @return $list;
 }
 
-//  88                                  88
-//  88                                  ""
-//  88
-//  88,dPPYba,   ,adPPYYba,  ,adPPYba,  88   ,adPPYba,
-//  88P'    "8a  ""     `Y8  I8[    ""  88  a8"     ""
-//  88       d8  ,adPPPPP88   `"Y8ba,   88  8b
-//  88b,   ,a8"  88,    ,88  aa    ]8I  88  "8a,   ,aa
-//  8Y"Ybbd8"'   `"8bbdP"Y8  `"YbbdP"'  88   `"Ybbd8"'
+//
+//   ,adPPYba,   ,adPPYba,   8b,dPPYba,   ,adPPYba,
+//  a8"     ""  a8"     "8a  88P'   "Y8  a8P_____88
+//  8b          8b       d8  88          8PP"""""""
+//  "8a,   ,aa  "8a,   ,a8"  88          "8b,   ,aa
+//   `"Ybbd8"'   `"YbbdP"'   88           `"Ybbd8"'
+//
 
 /////////////////////////////////////////////////////////////////////////
 // list-map versions of map-keys(), -values() and -has-key() functions //
@@ -293,7 +289,7 @@
     $index: index($keys1, tuple-key($tuple));
 
     @if $index { $list1: set-nth($list1, $index, $tuple); }
-    @else { $list1: append($list1, $tuple, 'comma'); } }
+    @else { $list1: append($list1, $tuple, 'comma'); }
   }
 
   @return $list1;
@@ -322,6 +318,7 @@
   @return $output;
 }
 
+//
 //                       88                                                                         88
 //                       88                                                                         88
 //                       88                                                                         88
@@ -330,6 +327,7 @@
 //  ,adPPPPP88  8b       88   `8b   d8'   ,adPPPPP88  88       88  8b          8PP"""""""  8b       88
 //  88,    ,88  "8a,   ,d88    `8b,d8'    88,    ,88  88       88  "8a,   ,aa  "8b,   ,aa  "8a,   ,d88
 //  `"8bbdP"Y8   `"8bbdP"Y8      "8"      `"8bbdP"Y8  88       88   `"Ybbd8"'   `"Ybbd8"'   `"8bbdP"Y8
+//
 
 //////////////////////////////////////////////////////////////
 // deep/nested map functions: map-get-z() and map-merge-z() //
@@ -425,6 +423,7 @@
 @function merge($args...) { @return map-merge-z($args...); }
 @function set($args...) { @return map-merge-z($args...); }
 
+//
 //                             ,d
 //                             88
 //   ,adPPYba,  8b,     ,d8  MM88MMM  8b,dPPYba,  ,adPPYYba,  ,adPPYba,
@@ -432,6 +431,7 @@
 //  8PP"""""""     )888(       88     88          ,adPPPPP88   `"Y8ba,
 //  "8b,   ,aa   ,d8" "8b,     88,    88          88,    ,88  aa    ]8I
 //   `"Ybbd8"'  8P'     `Y8    "Y888  88          `"8bbdP"Y8  `"YbbdP"'
+//
 
 /////////////////////////////////////
 // additional map helper functions //
@@ -511,9 +511,7 @@
 // map-pretty(): return the string representation of a map with indents and line breaks
 // ---
 // [0.9.9] added
-// ---
-// @alias `map-inspect-pretty`, `map-inspect-p`
-// ---
+//
 // @param [list] $list: map
 // @param [number] $level (1): internal variable, do not touch
 // ---
