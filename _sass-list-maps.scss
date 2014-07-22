@@ -14,18 +14,21 @@
 //   `"YbbdP'Y8    "Y888  88  88  88    "Y888  88   `"Ybbd8"'  `"YbbdP"'
 //
 
-///////////////////////////
-// list helper functions //
-///////////////////////////
+////////////
+// list() //
+////////////
 
-// list(): return a comma-separated list from given argument(s)
-// ---
-// [0.9.3] deprecated; no longer used internally.
-// ---
-// @param [argList] $args: list values
-// ---
-// @return [list]
-
+/**
+ * Return a comma-separated list of the given argument(s).
+ *
+ * @since 0.9.3
+ *
+ * @deprecated No longer used
+ *
+ * @param {ArgList} $args - list values
+ *
+ * @return {list}
+ */
 @function list($args...) {
 
   $output: ();
@@ -37,15 +40,20 @@
   @return $output;
 }
 
-// slice(): return a sub-list from a list, 'sliced' from/to given indices
-// ---
-// @param [list] $list: list to slice
-// @param [number] $start (1): start index
-// @param [number] $end (length($list)): end index
-// @param [string] $sep ('comma'): default list separator
-// ---
-// @return [list]
+/////////////
+// slice() //
+/////////////
 
+/**
+ * Return a sub-list from `$list`, sliced from `$start` to `$end`.
+ *
+ * @param {List}   $list                  - list to slice
+ * @param {Number} $start (1)             - start index
+ * @param {Number} $end   (length($list)) - end index
+ * @param {String} $sep   ('comma')       - default list separator
+ *
+ * @return {List}
+ */
 @function slice($list, $start: 1, $end: length($list), $sep: 'comma') {
 
   $output: ();
@@ -57,15 +65,20 @@
   @return $output;
 }
 
-// set-nth(): return a list with value at index set/updated to new value
-// ---
-// @param [list] $list: list to set
-// @param [number] $index: index to set
-// @param [literal] $value: new value
-// @param [string] $sep ('comma'): list separator
-// ---
-// @return [list]
+///////////////
+// set-nth() //
+///////////////
 
+/**
+ * Return `$list` with value at nth `$index` set/updated to `$value`.
+ *
+ * @param {List}   $list            - list to set
+ * @param {Number} $index           - index to set
+ * @param {*}      $value           - new value
+ * @param {String} $sep   ('comma') - list separator
+ *
+ * @return {List}
+ */
 @function set-nth($list, $index, $value, $sep: 'comma') {
 
   $length: length($list);
@@ -92,59 +105,71 @@
   @return $output;
 }
 
-///////////////////////////////
-// list-map helper functions //
-///////////////////////////////
+/////////////////
+// tuple-key() //
+/////////////////
 
-// tuple-key(): return the key (first value) from a tuple (pair)
-// ---
-// @alias key
-// ---
-// [0.9.3] added alias
-// ---
-// @param [list] $tuple: pair (list of length 2), to extract key from
-// ---
-// @return [literal]
-
+/**
+ * Return the key (first value) from `$tuple` (pair).
+ *
+ * @param {List} $tuple - pair (list of length 2), to extract key from
+ *
+ * @return {*}
+ */
 @function tuple-key($tuple) {
 
-  @if length($tuple) < 1 { @return null; }
+  @if length($tuple) < 1 {
+    @return null;
+  }
 
   @return nth($tuple, 1);
 }
 
+/**
+ * @alias tuple-key
+ *
+ * @since 0.9.3
+ */
 @function key($tuple) { @return tuple-key($tuple); }
 
-// tuple-value(): return the value (second value) from a tuple (pair)
-// ---
-// @alias value()
-// ---
-// [0.9.3] added alias
-// ---
-// @param [list] $tuple: pair (list of length 2), to extract value from
-// ---
-// @return [literal]
+///////////////////
+// tuple-value() //
+///////////////////
 
+/**
+ * Return the value (second value) from `$tuple` (pair).
+ *
+ * @param {List} $tuple - pair (list of length 2), to extract value from
+ *
+ * @return {*}
+ */
 @function tuple-value($tuple) {
 
-  @if length($tuple) < 2 { @return null; }
+  @if length($tuple) < 2 {
+    @return null;
+  }
 
   @return nth($tuple, 2);
 }
 
+/**
+ * @alias tuple-value
+ *
+ * @since 0.9.3
+ */
 @function value($tuple) { @return tuple-value($tuple); }
 
-// list-map-check(): return list-map from list; ensure input list-maps are lists-of-lists
-// ---
-// [0.9.5] added; replaces use of 'list()' function
-// @param [list] $list: list-map to check
-// ---
-// @return [list]
-
+/**
+ * Return list-map from `$list` and ensure input list-maps are lists-of-lists.
+ *
+ * @since 0.9.5 - replaces use of `list` function.
+ *
+ * @param {List} $list - list-map to check
+ *
+ * @return {List}
+ */
 @function list-map-check($list) {
-
   @if length($list) == 2 and length(nth($list, 1)) == 1 {
-
     @return append((), $list, 'comma');
   }
 
@@ -159,22 +184,24 @@
 //   `"Ybbd8"'   `"YbbdP"'   88           `"Ybbd8"'
 //
 
-/////////////////////////////////////////////////////////////////////////
-// list-map versions of map-keys(), -values() and -has-key() functions //
-/////////////////////////////////////////////////////////////////////////
+////////////////
+// map-keys() //
+////////////////
 
-// map-keys(): return comma-separated list of keys from map [conformant with rubysass map-keys()]
-// ---
-// @alias keys()
-// ---
-// [0.9.5] use list-map-check to handle single pairs automatically
-// ---
-// @param [argList] $list: list to retrieve keys from
-// ---
-// @return [list]
-
+/**
+ * Return comma-separated list of keys from map.
+ * Conformant with rubysass `map-keys`.
+ *
+ * @since 0.9.5 - use `list-map-check` to handle single pairs automatically
+ *
+ * @param {ArgList} $list - list to retrieve keys from
+ *
+ * @requires {function} list-map-check
+ * @requires {function} tuple-key
+ *
+ * @return {List}
+ */
 @function map-keys($list...) {
-
   $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $output: ();
 
@@ -185,20 +212,34 @@
   @return $output;
 }
 
-@function keys($list...) { @return map-keys($list...); }
+/**
+ * @alias map-keys
+ *
+ * @since 1.0.0
+ */
+@function keys($list...) { 
 
-// map-values(): return comma-separated list of values from map [conformant with rubysass map-values()]
-// ---
-// @alias values()
-// ---
-// [0.9.5] use list-map-check to handle single pairs automatically
-// ---
-// @param [argList] $list: list to retrieve values from
-// ---
-// @return [list]
+  @return map-keys($list...); 
+}
 
+//////////////////
+// map-values() //
+//////////////////
+
+/**
+ * Return comma-separated list of values from map.
+ * Conformant with rubysass `map-values`.
+ *
+ * @since 0.9.5 - use `list-map-check` to handle single pairs automatically
+ *
+ * @param {ArgList} $list - list to retrieve values from
+ *
+ * @requires {function} list-map-check
+ * @requires {function} tuple-value
+ *
+ * @return {List}
+ */
 @function map-values($list...) {
-
   $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $output: ();
 
@@ -209,17 +250,32 @@
   @return $output;
 }
 
-@function values($list...) { @return map-values($list...); }
+/**
+ * @alias map-values
+ *
+ * @since 1.0.0
+ */
+@function values($list...) { 
 
-// map-has-key(): check whether key exists in map at root level [conformant with rubysass map-has-key()]
-// ---
-// @alias has-key()
-// ---
-// @param [list] $list: list to check
-// @param [literal] $key: key to check in list
-// ---
-// @return [bool]
+  @return map-values($list...); 
+}
 
+///////////////////
+// map-has-key() //
+///////////////////
+
+/**
+ * Check whether `$key` exists in `$list` at root level.
+ * Conformant with rubysass `map-has-key()`.
+ *
+ * @param {List} $list - list to check
+ * @param {*}    $key  - key to check in list
+ *
+ * @requires {function} list-map-check
+ * @requires {function} tuple-key
+ *
+ * @return {Bool}
+ */
 @function map-has-key($list, $key) {
 
   $list: list-map-check($list);
@@ -234,30 +290,43 @@
   @return false;
 }
 
-@function has-key($list, $key) { @return map-has-key($list, $key); }
+/**
+ * @alias map-has-key
+ *
+ * @since 1.0.0
+ */
+@function has-key($list, $key) { 
+
+  @return map-has-key($list, $key); 
+}
 
 ////////////////////////////////////////////////////////////
 // list-map versions of map-get(), -merge() and -remove() //
 ////////////////////////////////////////////////////////////
 
-// map-get(): return value corresponding to key in map; conformant to rubysass map-get()
-// ---
-// [0.9.5] list-map-check() now handles single-pair inputs / outputs
-// ---
-// @param [list] $list: map
-// @param [literal] $key: key by which to look up value
-// @param [bool] $check (true): whether or not to check the map format first
-// ---
-// @return [literal] | [null]
-
+/**
+ * Return value corresponding to `$key` in `$list`.
+ * Conformant with rubysass `map-get`.
+ *
+ * @since 0.9.5 - uses `list-map-check()` to handle single pairs automatically
+ *
+ * @param {List} $list         - map
+ * @param {*}    $key          - key by which to look up value
+ * @param {Bool} $check (true) - whether or not to check the map format first
+ *
+ * @requires {function} tuple-key
+ * @requires {function} tuple-value
+ * @requires {function} list-map-check
+ *
+ * @return {*}
+ */
 @function map-get($list, $key, $check: true) {
-
-  @if $check { $list: list-map-check($list); }
+  @if $check {
+    $list: list-map-check($list);
+  }
 
   @each $tuple in $list {
-
     @if tuple-key($tuple) == $key {
-
       @return list-map-check(tuple-value($tuple));
     }
   }
@@ -265,16 +334,23 @@
   @return null;
 }
 
-// map-merge(): return a merge of second map in to first map; conformant to rubysass map-merge()
-// ---
-// [0.9.5] list-map-check() handles single pairs; $check param for internal use
-// ---
-// @param [list] $list1: first map
-// @param [list] $list2: second map
-// @param [bool] $check (true): whether or not to check the map first
-// ---
-// @return [list]
-
+/**
+ * Return a merge of second map in to first map.
+ * Conformant with rubysass `map-merge`.
+ *
+ * @since 0.9.5 - use `list-map-check` to handle single pairs automatically; `$check` parameter for internal use
+ *
+ * @param {List} $list1        - first map
+ * @param {List} $list2        - second map
+ * @param {Bool} $check (true) - whether or not to check the map first
+ *
+ * @requires {function} tuple-key
+ * @requires {function} list-map-check
+ * @requires {function} map-keys
+ * @requires {function} set-nth
+ *
+ * @return {List}
+ */
 @function map-merge($list1, $list2, $check: true) {
 
   @if $check {
@@ -290,18 +366,24 @@
 
     @if $index { $list1: set-nth($list1, $index, $tuple); }
     @else { $list1: append($list1, $tuple, 'comma'); }
+
   }
 
   @return $list1;
 }
 
-// map-remove(): return map with tuple removed, according to key (if found); conformant to rubysass map-remove()
-// ---
-// @param [list] $list: map
-// @param [literal] $key: key
-// ---
-// @return [list]
-
+/**
+ * Return map with tuple removed, according to `$key` (if found).
+ * Conformant with rubysass `map-remove()`.
+ *
+ * @param {List} $list - map
+ * @param {*}    $key  - key
+ *
+ * @requires {function} map-keys
+ * @requires {function} list-map-check
+ *
+ * @return {List}
+ */
 @function map-remove($list, $key) {
 
   $list: list-map-check($list);
@@ -309,7 +391,6 @@
   $output: ();
 
   @for $n from 1 through length($list) {
-
     @if nth($keys, $n) != $key {
       $output: append($output, nth($list, $n), 'comma');
     }
@@ -333,21 +414,24 @@
 // deep/nested map functions: map-get-z() and map-merge-z() //
 //////////////////////////////////////////////////////////////
 
-// map-get-z(): a 'deep', nested or chained version of `map-get` (see above); unique
-// ---
-// [0.9.5] now uses list-map-check to handle single-pair list-maps
-// [0.9.2] aliased to get(); can replace map-get() and map-get-z() in usage
-// ---
-// @alias `get`
-// ---
-// @param [list] $list: map
-// @param [argList] $keys: nested / chained key list (where to get value)
-// ---
-// @return [literal] | [null]
-
+/**
+ * A *deep* nested or chained version of `map-get`.
+ *
+ * @since 0.9.5 - now uses `list-map-check` to handle single pairs automatically
+ * @since 0.9.2 - aliased as `get`; can replace `map-get` and `map-get-z` in usage
+ *
+ * @param {List}    $list - map
+ * @param {ArgList} $keys - nested / chained key list (where to get value)
+ *
+ * @requires {function} map-get
+ *
+ * @return {*}
+ */
 @function map-get-z($list, $keys...) {
 
-  @if $list == null { @return $list; }
+  @if $list == null {
+    @return $list;
+  }
 
   $length: length($keys);
   $list: map-get($list, nth($keys, 1));
@@ -356,7 +440,9 @@
 
     @for $n from 2 through $length {
 
-      @if $list == null { @return $list; }
+      @if $list == null {
+        @return $list;
+      }
 
       $list: map-get($list, nth($keys, $n), false);
     }
@@ -367,21 +453,29 @@
   @return $list;
 }
 
-// alias
-@function get($args...) { @return map-get-z($args...); }
+/**
+ * @alias map-get-z
+ */
+@function get($args...) {
+  @return map-get-z($args...);
+}
 
-// map-merge-z(): a 'deep', nested or chained version of `map-merge`; offers `map-set` syntax too
-// ---
-// [0.9.5] now uses list-map-check to handle single-pair list-maps
-// [0.9.2] aliased to merge() and set(); can replace map-merge() and map-merge-z() in usage
-// ---
-// @alias `merge`, `set`
-// ---
-// @param [list] $list: map
-// @param [argList] $keys-and-values: nested / chained key list (where to merge value); final item in list is the value to be merged
-// ---
-// @return [list]
-
+/**
+ * A *deep* nested or chained version of `map-merge()`. Offers `map-set` syntax too.
+ *
+ * @since 0.9.5 - now uses `list-map-check` to handle single pairs automatically
+ * @since 0.9.2 - aliased as `merge` and `set`; can replace `map-merge` and `map-merge-z` in usage
+ *
+ * @param {List}    $list            - map
+ * @param {ArgList} $keys-and-values - nested / chained key list (where to merge value); final item in list is the value to be merged
+ *
+ * @requires {function} list-map-check
+ * @requires {function} map-merge
+ * @requires {function} map-get-z
+ * @requires {function} slice
+ *
+ * @return {List}
+ */
 @function map-merge-z($list, $keys-and-value...) {
 
   $arg-length: length($keys-and-value);
@@ -419,9 +513,19 @@
   @return $value;
 }
 
-// aliases
-@function merge($args...) { @return map-merge-z($args...); }
-@function set($args...) { @return map-merge-z($args...); }
+/**
+ * @alias map-merge-z
+ */
+@function merge($args...) {
+  @return map-merge-z($args...);
+}
+
+/**
+ * @alias map-merge-z
+ */
+@function set($args...) {
+  @return map-merge-z($args...);
+}
 
 //
 //                             ,d
@@ -433,52 +537,70 @@
 //   `"Ybbd8"'  8P'     `Y8    "Y888  88          `"8bbdP"Y8  `"YbbdP"'
 //
 
-/////////////////////////////////////
-// additional map helper functions //
-/////////////////////////////////////
+////////////////////
+// map-prev-key() //
+////////////////////
 
-// map-prev-key(): return previous key from map
-// ---
-// [0.9.5] added
-// ---
-// @param [list] $list: map
-// @param [literal] $key: pivot key
-// ---
-// @return [literal]
-
+/**
+ * Return previous key from map.
+ *
+ * @since 0.9.5
+ *
+ * @param {List} $list - map
+ * @param {*}    $key  - pivot key
+ *
+ * @requires {function} map-keys
+ * @requires {function} list-map-check
+ *
+ * @return {*}
+ */
 @function map-prev-key($list, $key) {
-
   $list: list-map-check($list);
   $keys: map-keys($list);
 
   @return nth($keys, index($keys, $key) - 1);
 }
 
-// map-next-key(): return next key from map
-// ---
-// [0.9.5] added
-// ---
-// @param [list] $list: map
-// @param [literal] $key: pivot key
-// ---
-// @return [literal]
+////////////////////
+// map-next-key() //
+////////////////////
 
+/**
+ * Return next key from map.
+ *
+ * @since 0.9.5
+ *
+ * @param {List} $list - map
+ * @param {*}    $key  - pivot key
+ *
+ * @requires {function} map-keys
+ * @requires {function} list-map-check
+ *
+ * @return {*}
+ */
 @function map-next-key($list, $key) {
-
   $list: list-map-check($list);
   $keys: map-keys($list);
 
   @return nth($keys, index($keys, $key) + 1);
 }
 
-// map-inspect(): return the string representation of a map
-// ---
-// [0.9.5] added
-// ---
-// @param [argList] $list: map
-// ---
-// @return [string]
-
+// map-inspect()
+/**
+ * Return the string representation of a map.
+ *
+ * @since 0.9.5
+ *
+ * @param {ArgList} $list - map
+ *
+ * @requires {function} map-keys
+ * @requires {function} list-map-check
+ * @requires {function} tuple-key
+ * @requires {function} tuple-value
+ * @requires {function} map-inspect
+ *
+ * @return {String}
+ */
 @function map-inspect($list...) {
 
   $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
@@ -507,32 +629,36 @@
   @return $output + ')';
 }
 
+//////////////////
+// map-pretty() //
+//////////////////
 
-// map-pretty(): return the string representation of a map with indents and line breaks
-// ---
-// [0.9.9] added
-//
-// @param [list] $list: map
-// @param [number] $level (1): internal variable, do not touch
-// ---
-// @return [string]
-
+/**
+ * Return the string representation of a map with indents and line breaks.
+ *
+ * @since 0.9.9
+ *
+ * @param {List}   $list      - map
+ * @param {Number} $level (1) - internal variable, do not touch
+ *
+ * @requires {function} map-keys
+ * @requires {function} tuple-key
+ * @requires {function} tuple-value
+ * @requires {function} list-map-check
+ * @requires {function} map-pretty
+ *
+ * @return {String}
+ */
 @function map-pretty($list, $level: 1) {
-
-  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
-  $indent: $tab; $outdent: $tab;
   $tab: '  ';
   $cr: '
 ';
 
-  @for $n from 1 through $level {
+  $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
+  $indent: $tab; $outdent: $tab;
 
-    $indent: $indent + $tab;
-
-    @if $i < $level {
-      $outdent: $outdent + $tab;
-    }
-  }
+  @for $n from 1 through $level { $indent: $indent + $tab; }
+  @for $n from 1 through $level - 1 { $outdent: $outdent + $tab; }
 
   $output: '(' + $cr + $indent;
   $i: 1;
@@ -544,36 +670,62 @@
     }
 
     @else {
-      $key: tuple-key($tuple);
-      $value: tuple-value($tuple);
-      $output: $output + '#{$key} ' + if(type-of($value) == 'list', '#{map-pretty($value, $level+1)}', '#{$value}');
+      $key: nth($tuple, 1); $value: nth($tuple, 2);
+      @if type-of($value) == 'list' { $output: $output + '#{$key} #{map-pretty($value, $level+1)}'; }
+      @else { $output: $output + '#{$key} #{$value}'; }
     }
 
-    @if $i < length(map-keys($list)) {
-      $output: $output + ',' + $cr + $indent;
-    }
-
+    @if $i < length(map-keys($list)) { $output: $output + ',' + $cr + $indent; }
     $i: $i + 1;
   }
 
   @return $output + $cr + $outdent + ')';
 }
 
-// aliases
-@function map-inspect-pretty($list...) { @return map-pretty($list...); }
-@function map-inspect-p($list...) { @return map-pretty($list...); }
+/**
+ * @alias map-pretty
+ */
+@function map-inspect-pretty($list...) {
+  @return map-pretty($list...);
+}
+
+/**
+ * @alias map-pretty
+ */
+@function map-inspect-p($list...) {
+  @return map-pretty($list...);
+}
 
 ////////////////
 // map-sort() //
 ////////////////
 
-// global sort dir variable
+/**
+ * Global sort dir variable.
+ *
+ * @type String
+ */
 $list-map-sort-dir: 'asc';
 
-// return sorted list-map, based on values at given key in given list-map
+/**
+ * Return sorted list-map, based on values at given key in given list-map.
+ *
+ * @param {List}    $list-map
+ * @param {ArgList} $keys
+ *
+ * @requires {function} map-get-z
+ * @requires {function} list-map-check
+ * @requires {function} map-sort
+ *
+ * @return {List}
+ */
 @function map-sort($list-map, $keys...) {
-  @if length($keys) < 1 { @return $list-map; }
+  @if length($keys) < 1 {
+    @return $list-map;
+  }
+
   $list-map: list-map-check($list-map);
+
   @if length($list-map) > 1 {
     $less: (); $equal: (); $greater: ();
     $seed: nth($list-map, ceil(length($list-map) / 2));
@@ -593,18 +745,26 @@ $list-map-sort-dir: 'asc';
     }
     @return join(join(map-sort($less, $keys...), $equal), map-sort($greater, $keys...));
   }
+
   @return $list-map;
 }
 
-// map-json(): return json string representation of a map
-// ---
-// [1.0.0] added
-// ---
-// @param [list] $list: map
-// @param [number] $level (1): internal variable, do not touch
-// ---
-// @return [string]
+////////////////
+// map-json() //
+////////////////
 
+/**
+ * Return JSON string representation of a map
+ *
+ * @since 1.0.0
+ *
+ * @param {ArgList} $list
+ *
+ * @requires {function} list-map-check
+ * @requires {function} map-keys
+ *
+ * @return {String}
+ */
 @function map-json($list...) {
 
   $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
