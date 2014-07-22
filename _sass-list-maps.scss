@@ -14,38 +14,15 @@
 //   `"YbbdP'Y8    "Y888  88  88  88    "Y888  88   `"Ybbd8"'  `"YbbdP"'
 //
 
-////////////
-// list() //
-////////////
+
+//////////////////
+// list-slice() //
+//////////////////
 
 /**
- * Return a comma-separated list of the given argument(s).
+ * Return a sub-list from `$list`, sliced from `$start` to `$end` indexes.
  *
- * @since 0.9.3
- *
- * @deprecated No longer used
- *
- * @param {ArgList} $args - list values
- *
- * @return {list}
- */
-@function list($args...) {
-
-  $output: ();
-
-  @each $arg in $args {
-    $output: append($output, $arg, 'comma');
-  }
-
-  @return $output;
-}
-
-/////////////
-// slice() //
-/////////////
-
-/**
- * Return a sub-list from `$list`, sliced from `$start` to `$end`.
+ * @since 1.0.0 - renamed to 'list-slice', aliased to 'slice'
  *
  * @param {List}   $list                  - list to slice
  * @param {Number} $start (1)             - start index
@@ -53,8 +30,13 @@
  * @param {String} $sep   ('comma')       - default list separator
  *
  * @return {List}
+ *
+ * @example scss
+ * .test {
+ *   out: list-slice(a b c d e, 2, 4); // b c d
+ * }
  */
-@function slice($list, $start: 1, $end: length($list), $sep: 'comma') {
+@function list-slice($list, $start: 1, $end: length($list), $sep: 'comma') {
 
   $output: ();
 
@@ -65,12 +47,21 @@
   @return $output;
 }
 
-///////////////
-// set-nth() //
-///////////////
+/**
+ * @alias list-slice
+ *
+ * @since 1.0.0
+ */
+@function slice($args...) { @return list-slice($args...); }
+
+////////////////////
+// list-set-nth() //
+////////////////////
 
 /**
- * Return `$list` with value at nth `$index` set/updated to `$value`.
+ * Return `$list` with value at `$index` set/updated to `$value`.
+ *
+ * @since 1.0.0 - renamed to 'list-set-nth', aliased to 'set-nth'
  *
  * @param {List}   $list            - list to set
  * @param {Number} $index           - index to set
@@ -78,8 +69,17 @@
  * @param {String} $sep   ('comma') - list separator
  *
  * @return {List}
+ *
+ * @example scss
+ * .test {
+ *   out: list-set-nth(a b c d e, 2, z);
+ * }
+ * @example css
+ * .test {
+ *   out: a z c d e;
+ * }
  */
-@function set-nth($list, $index, $value, $sep: 'comma') {
+@function list-set-nth($list, $index, $value, $sep: 'comma') {
 
   $length: length($list);
   $output: ();
@@ -105,14 +105,21 @@
   @return $output;
 }
 
+/**
+ * @alias list-set-nth
+ *
+ * @since 1.0.0
+ */
+@function set-nth($args...) { @return list-set-nth($args...); }
+
 /////////////////
 // tuple-key() //
 /////////////////
 
 /**
- * Return the key (first value) from `$tuple` (pair).
+ * Return the key (first item) from a `$tuple` (pair).
  *
- * @param {List} $tuple - pair (list of length 2), to extract key from
+ * @param {List} $tuple - a pair (list of length 2), to extract key from
  *
  * @return {*}
  */
@@ -137,9 +144,9 @@
 ///////////////////
 
 /**
- * Return the value (second value) from `$tuple` (pair).
+ * Return the value (second item) from a `$tuple` (pair).
  *
- * @param {List} $tuple - pair (list of length 2), to extract value from
+ * @param {List} $tuple - a pair (list of length 2), to extract value from
  *
  * @return {*}
  */
@@ -160,15 +167,18 @@
 @function value($tuple) { @return tuple-value($tuple); }
 
 /**
- * Return list-map from `$list` and ensure input list-maps are lists-of-lists.
+ * Returns a valid list-map from `$list`, ensuring it is a list-of-lists.
  *
- * @since 0.9.5 - replaces use of `list` function.
+ * @since 0.9.5
+ *
+ * @access private
  *
  * @param {List} $list - list-map to check
  *
  * @return {List}
  */
 @function list-map-check($list) {
+
   @if length($list) == 2 and length(nth($list, 1)) == 1 {
     @return append((), $list, 'comma');
   }
@@ -190,9 +200,9 @@
 
 /**
  * Return comma-separated list of keys from map.
- * Conformant with rubysass `map-keys`.
+ * (Conformant with ruby-sass `map-keys()` function)
  *
- * @since 0.9.5 - use `list-map-check` to handle single pairs automatically
+ * @since 0.9.5 - uses `list-map-check()` to handle single pairs
  *
  * @param {ArgList} $list - list to retrieve keys from
  *
@@ -217,9 +227,9 @@
  *
  * @since 1.0.0
  */
-@function keys($list...) { 
+@function keys($list...) {
 
-  @return map-keys($list...); 
+  @return map-keys($list...);
 }
 
 //////////////////
@@ -228,9 +238,9 @@
 
 /**
  * Return comma-separated list of values from map.
- * Conformant with rubysass `map-values`.
+ * (Conformant with ruby-sass `map-values()` function)
  *
- * @since 0.9.5 - use `list-map-check` to handle single pairs automatically
+ * @since 0.9.5 - uses `list-map-check()` to handle single pairs
  *
  * @param {ArgList} $list - list to retrieve values from
  *
@@ -255,9 +265,9 @@
  *
  * @since 1.0.0
  */
-@function values($list...) { 
+@function values($list...) {
 
-  @return map-values($list...); 
+  @return map-values($list...);
 }
 
 ///////////////////
@@ -266,7 +276,7 @@
 
 /**
  * Check whether `$key` exists in `$list` at root level.
- * Conformant with rubysass `map-has-key()`.
+ * (Conformant with ruby-sass `map-has-key()` function).
  *
  * @param {List} $list - list to check
  * @param {*}    $key  - key to check in list
@@ -295,9 +305,9 @@
  *
  * @since 1.0.0
  */
-@function has-key($list, $key) { 
+@function has-key($list, $key) {
 
-  @return map-has-key($list, $key); 
+  @return map-has-key($list, $key);
 }
 
 ////////////////////////////////////////////////////////////
@@ -364,7 +374,7 @@
 
     $index: index($keys1, tuple-key($tuple));
 
-    @if $index { $list1: set-nth($list1, $index, $tuple); }
+    @if $index { $list1: list-set-nth($list1, $index, $tuple); }
     @else { $list1: append($list1, $tuple, 'comma'); }
 
   }
@@ -504,7 +514,7 @@
       @else { $new-list: append((), nth($keys-and-value, $key-length + 1 - $i) $value, 'comma'); }
 
       @if $i == $key-length { $old-list: $list; }
-      @else { $old-list: map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or (); }
+      @else { $old-list: map-get-z($list, list-slice($keys-and-value, 1, $key-length - $i)...) or (); }
 
       $value: map-merge($old-list, $new-list);
     }
