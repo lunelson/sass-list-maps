@@ -521,26 +521,26 @@
   $tab: '  ';
   $cr: '
 ';
-  
+
   $list: if(length($list) == 1, list-map-check($list...), list-map-check($list));
   $indent: $tab; $outdent: $tab;
 
   @for $n from 1 through $level { $indent: $indent + $tab; }
   @for $n from 1 through $level - 1 { $outdent: $outdent + $tab; }
 
-  $output: '(' + $cr + $indent; 
+  $output: '(' + $cr + $indent;
   $i: 1;
 
   @each $tuple in $list {
 
     @if length($tuple) != 2 {
-      $output: $output + '#{$tuple}'; 
+      $output: $output + '#{$tuple}';
     }
 
     @else {
       $key: nth($tuple, 1); $value: nth($tuple, 2);
       @if type-of($value) == 'list' { $output: $output + '#{$key} #{map-pretty($value, $level+1)}'; }
-      @else { $output: $output + '#{$key} #{$value}'; } 
+      @else { $output: $output + '#{$key} #{$value}'; }
     }
 
     @if $i < length(map-keys($list)) { $output: $output + ',' + $cr + $indent; }
