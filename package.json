@@ -1,0 +1,25 @@
+{
+  "name": "sass-list-maps",
+  "version": "1.0.0-b",
+  "description": "Forward-compatible map (hash) functions for libsass and ruby-sass < 3.3",
+  "main": "_sass-list-maps.scss",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lunelson/sass-list-maps.git"
+  },
+  "keywords": [
+    "libsass",
+    "sass",
+    "map",
+    "maps",
+    "list",
+    "lists",
+    "data"
+  ],
+  "author": "Lu Nelson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lunelson/sass-list-maps/issues"
+  },
+  "homepage": "https://github.com/lunelson/sass-list-maps"
+}

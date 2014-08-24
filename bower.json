@@ -1,6 +1,6 @@
 {
   "name": "sass-list-maps",
-  "version": "0.9.9",
+  "version": "1.0.0-b",
   "homepage": "https://github.com/lunelson/sass-list-maps",
   "authors": [
     "Lu Nelson <lunelson@gmail.com>"
@@ -20,12 +20,13 @@
   "ignore": [
     ".*",
     "**/.*",
+    "doc*",
     "lib",
+    "test*",
     "*.gem*",
     "sache.json",
     "node_modules",
     "bower_components",
-    "test*",
     "sass-hash.jpg",
     "sass-list-maps.todo",
     "sass-list-maps.sublime-project"
