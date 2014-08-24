@@ -6,6 +6,7 @@ These functions provide forward-compatible map (hash) data-type functionality fo
 
 #### Updates
 
+* 1.0.0-b -- preparing for 1.0; added npm distribution and newly commented source code thanks to Hugo Giraudel. Next version will use SassDoc-style comments.
 * 0.9.9 -- added `map-pretty()` function to inspect/debug list-maps in pretty-printed form
 * 0.9.6-0.9.8 -- argument-handling enhancements; typo fixes
 * 0.9.3-0.9.5 -- handling single-pair lists automatically. This means no more need for `list()` or `zip()` functions, which are now deprecated.
