@@ -18,9 +18,12 @@ You can test-drive these functions at [Sassmeister, in this pre-loaded gist](htt
 
 #### Install it
 
-'Sass List-Maps' can be installed as a Bower component for non-ruby setups (see [node-sass options](http://github.com/sindresorhus/grunt-sass#includepaths) if you are using libsass via node) or as a gem-based Compass extension for ruby setups:
+'Sass List-Maps' can be installed as a Bower component or NPM module for non-ruby setups (see [node-sass options](http://github.com/sindresorhus/grunt-sass#includepaths) if you are using libsass via node) or as a gem-based Compass extension for ruby setups:
 
 ```sh
+# installation with npm
+npm install sass-list-maps
+
 # installation with bower
 bower install sass-list-maps
 
