@@ -6,6 +6,7 @@ These functions provide forward-compatible map (hash) data-type functionality fo
 
 #### Updates
 
+* 1.0.0-b2 -- updated `map-remove()` function to allow removing multiple keys; conformant to ruby-sass 3.4.
 * 1.0.0-b -- preparing for 1.0; added npm distribution and newly commented source code thanks to Hugo Giraudel. Next version will use SassDoc-style comments.
 * 0.9.9 -- added `map-pretty()` function to inspect/debug list-maps in pretty-printed form
 * 0.9.6-0.9.8 -- argument-handling enhancements; typo fixes
@@ -272,7 +273,6 @@ There are a few points that bear mentioning/repeating:
 
 ### To-Dos
 
-* Make a depth-based version of `map-remove()`
 * Push a native maps version of the 'advanced' functions above
 
 ### Acknowledgements
