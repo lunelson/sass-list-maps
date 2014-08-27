@@ -383,26 +383,24 @@
 }
 
 /**
- * Return map with tuple removed, according to `$key` (if found).
- * Conformant with rubysass `map-remove()`.
+ * Return map with tuples removed, according to `$keys` (if found).
+ * Conformant with rubysass 3.4 `map-remove()`.
  *
  * @param {List} $list - map
  * @param {*}    $key  - key
  *
- * @requires {function} map-keys
  * @requires {function} list-map-check
  *
  * @return {List}
  */
-@function map-remove($list, $key) {
+@function map-remove($list, $keys...) {
 
   $list: list-map-check($list);
-  $keys: map-keys($list);
   $output: ();
 
-  @for $n from 1 through length($list) {
-    @if nth($keys, $n) != $key {
-      $output: append($output, nth($list, $n), 'comma');
+  @each $tuple in $list {
+    @if index($keys, tuple-key($tuple)) == false {
+      $output: append($output, $tuple, 'comma');
     }
   }
 
