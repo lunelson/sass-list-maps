@@ -2,7 +2,7 @@
 
 These functions provide forward-compatible map (hash) data-type functionality for [libsass](http://libsass.org/) and [ruby-sass](http://sass-lang.com/) 3.2.x using the SassScript `list` data-type. They are a polyfill for the `map` data-type introduced in ruby-sass 3.3.x. They feature-match all the current native (ruby-sass) `map` functions, and add nested (or 'chained') `get()`, `set()` and `merge()` functions and inspection / debugging functions as well.
 
-![](/sass-hash.jpg)
+![](sass-hash.jpg)
 
 #### Updates
 
