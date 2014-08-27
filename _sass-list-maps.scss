@@ -566,9 +566,9 @@ $list-map-sort-dir: 'asc';
   @if length($list-map) > 1 {
     $less: (); $equal: (); $greater: ();
     $seed: nth($list-map, ceil(length($list-map) / 2));
+    $seed-value: map-get-z(nth($seed, 2), $keys...);
     @each $item in $list-map {
       $item-value: map-get-z(nth($item, 2), $keys...);
-      $seed-value: map-get-z(nth($seed, 2), $keys...);
       @if $list-map-sort-dir == 'asc' {
         @if $item-value == $seed-value { $equal: append($equal, $item, 'comma'); }
         @else if $item-value < $seed-value { $less: append($less, $item, 'comma'); }
