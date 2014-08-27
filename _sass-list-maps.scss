@@ -295,23 +295,21 @@
   @return $list1;
 }
 
-// map-remove(): return map with tuple removed, according to key (if found); conformant to rubysass map-remove()
+// map-remove(): return map with tuples removed, according to keys (if found); conformant to rubysass 3.4 map-remove()
 // ---
 // @param [list] $list: map
 // @param [literal] $key: key
 // ---
 // @return [list]
 
-@function map-remove($list, $key) {
+@function map-remove($list, $keys...) {
 
   $list: list-map-check($list);
-  $keys: map-keys($list);
   $output: ();
 
-  @for $n from 1 through length($list) {
-
-    @if nth($keys, $n) != $key {
-      $output: append($output, nth($list, $n), 'comma');
+  @each $tuple in $list {
+    @if index($keys, tuple-key($tuple)) == false {
+      $output: append($output, $tuple, 'comma');
     }
   }
 
