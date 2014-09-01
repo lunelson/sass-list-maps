@@ -250,15 +250,15 @@
 // ---
 // @return [literal] | [null]
 
-@function map-get($list, $key, $check: true) {
+@function map-get($list, $key) {
 
-  @if $check { $list: list-map-check($list); }
+  $list: list-map-check($list);
 
   @each $tuple in $list {
 
     @if tuple-key($tuple) == $key {
 
-      @return list-map-check(tuple-value($tuple));
+      @return tuple-value($tuple);
     }
   }
 
@@ -356,7 +356,7 @@
 
       @if $list == null { @return $list; }
 
-      $list: map-get($list, nth($keys, $n), false);
+      $list: map-get($list, nth($keys, $n));
     }
 
     @return $list;
