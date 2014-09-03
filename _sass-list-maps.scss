@@ -14,48 +14,42 @@
 //   `"YbbdP'Y8    "Y888  88  88  88    "Y888  88   `"Ybbd8"'  `"YbbdP"'
 //
 
-///////////////////////////
-// list helper functions //
-///////////////////////////
+//////////////////
+// list-slice() //
+//////////////////
 
-// list(): return a comma-separated list from given argument(s)
-// ---
-// [0.9.3] deprecated; no longer used internally.
-// ---
-// @param [argList] $args: list values
-// ---
-// @return [list]
+/**
+ * Return a sub-list from `$list`, sliced from `$start` to `$end` indexes.
+ *
+ * @since 1.0.0 - renamed to 'list-slice', aliased to 'slice'
+ *
+ * @param {List}   $list                  - list to slice
+ * @param {Number} $start (1)             - start index
+ * @param {Number} $end   (length($list)) - end index
+ * @param {String} $sep   ('comma')       - default list separator
+ *
+ * @return {List}
+ *
+ * @example scss
+ * .test {
+ *   out: list-slice(a b c d e, 2, 4); // b c d
+ * }
+ */
 
-@function list($args...) {
-
+@function list-slice($list, $start: 1, $end: length($list), $sep: 'comma') {
   $output: ();
-
-  @each $arg in $args {
-    $output: append($output, $arg, 'comma');
-  }
-
-  @return $output;
-}
-
-// slice(): return a sub-list from a list, 'sliced' from/to given indices
-// ---
-// @param [list] $list: list to slice
-// @param [number] $start (1): start index
-// @param [number] $end (length($list)): end index
-// @param [string] $sep ('comma'): default list separator
-// ---
-// @return [list]
-
-@function slice($list, $start: 1, $end: length($list), $sep: 'comma') {
-
-  $output: ();
-
   @for $i from $start through $end {
-    $output: append($output, nth($list, $i), $sep);
-  }
-
+    $output: append($output, nth($list, $i), $sep); }
   @return $output;
 }
+
+/**
+ * @alias list-slice
+ *
+ * @since 1.0.0
+ */
+
+@function slice($args...) { @return list-slice($args...); }
 
 // set-nth(): return a list with value at index set/updated to new value
 // ---

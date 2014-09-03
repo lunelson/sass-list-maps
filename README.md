@@ -6,6 +6,7 @@ These functions provide a forward-compatible polyfill for map (hash) data-type f
 
 #### Updates
 
+* 1.0.0-b3 -- altered use of `list-map-check()` in `map-get()` and `map-get-z()` functions
 * 1.0.0-b2 -- updated `map-remove()` function to allow removing multiple keys; conformant to ruby-sass 3.4.
 * 1.0.0-b -- preparing for 1.0; added npm distribution and newly commented source code thanks to Hugo Giraudel. Next version will use SassDoc-style comments.
 * 0.9.9 -- added `map-pretty()` function to inspect/debug list-maps in pretty-printed form
@@ -16,7 +17,7 @@ These functions provide a forward-compatible polyfill for map (hash) data-type f
 
 #### Try it
 
-You can test-drive these functions at [Sassmeister, in this pre-loaded gist](http://sassmeister.com/gist/8645654)—but note that the libsass version at Sassmeister might be a couple of point-releases behind this repo.
+You can test-drive these functions at [Sassmeister, in this pre-loaded gist](http://sassmeister.com/gist/29b2e72c4c7df859ec10)—but note that the libsass version at Sassmeister might be a couple of point-releases behind this repo.
 
 #### Install it
 

@@ -1,11 +1,11 @@
 {
   "name": "sass-list-maps",
-  "version": "1.0.0-b",
+  "version": "1.0.0-b3",
   "homepage": "https://github.com/lunelson/sass-list-maps",
   "authors": [
     "Lu Nelson <lunelson@gmail.com>"
   ],
-  "description": "Forward-compatible map (hash) functions for libsass and ruby-sass < 3.3",
+  "description": "Forward-compatible polyfill for map (hash) data-type functions in libsass 2.0 and ruby-sass < 3.3 using list data-type",
   "main": "_sass-list-maps.scss",
   "keywords": [
     "libsass",
