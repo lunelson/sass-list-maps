@@ -1,4 +1,4 @@
 docs*
-test*
 *.gem
 *.sublime*
+node_modules

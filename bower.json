@@ -5,7 +5,7 @@
   "authors": [
     "Lu Nelson <lunelson@gmail.com>"
   ],
-  "description": "Forward-compatible polyfill for map (hash) data-type functions in libsass 2.0 and ruby-sass < 3.3 using list data-type",
+  "description": "Polyfill for map (hash/object) data functionality in libsass and ruby-sass < 3.3.x.",
   "main": "_sass-list-maps.scss",
   "keywords": [
     "libsass",

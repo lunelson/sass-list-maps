@@ -1,0 +1,11 @@
+@import "../sass-list-maps";
+
+$test-map: (
+  alpha 1,
+  beta 2,
+);
+
+.debug {
+  out: 'hello world again';
+  out: map-pretty($test-map);
+}

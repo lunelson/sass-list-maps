@@ -1,8 +1,14 @@
 {
   "name": "sass-list-maps",
   "version": "1.0.0-b3",
-  "description": "Forward-compatible polyfill for map (hash) data-type functions in libsass 2.0 and ruby-sass < 3.3 using list data-type",
-  "main": "_sass-list-maps.scss",
+  "description": "Polyfill for map (hash/object) data functionality in libsass and ruby-sass < 3.3.x.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/lunelson/sass-list-maps.git"
@@ -21,5 +27,10 @@
   "bugs": {
     "url": "https://github.com/lunelson/sass-list-maps/issues"
   },
-  "homepage": "https://github.com/lunelson/sass-list-maps"
+  "homepage": "https://github.com/lunelson/sass-list-maps",
+  "devDependencies": {
+    "gulp": "^3.8.5",
+    "gulp-sass": "^0.7.2",
+    "gulp-strip-json-comments": "^1.0.1"
+  }
 }

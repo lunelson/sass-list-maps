@@ -1,4 +1,4 @@
-//  Sass List-Maps 1.0.0
+//  Sass List-Maps 1.0.0-b3
 //  a libsass polyfill for rubysass "maps" data-type -- using lists
 //  by @lunelson
 //  MIT License
@@ -14,27 +14,20 @@
 //   `"YbbdP'Y8    "Y888  88  88  88    "Y888  88   `"Ybbd8"'  `"YbbdP"'
 //
 
-//////////////////
-// list-slice() //
-//////////////////
+///////////////////////////
+// list helper functions //
+///////////////////////////
 
-/**
- * Return a sub-list from `$list`, sliced from `$start` to `$end` indexes.
- *
- * @since 1.0.0 - renamed to 'list-slice', aliased to 'slice'
- *
- * @param {List}   $list                  - list to slice
- * @param {Number} $start (1)             - start index
- * @param {Number} $end   (length($list)) - end index
- * @param {String} $sep   ('comma')       - default list separator
- *
- * @return {List}
- *
- * @example scss
- * .test {
- *   out: list-slice(a b c d e, 2, 4); // b c d
- * }
- */
+// list-slice(): return a sub-list from a list, 'sliced' from/to given indices
+// ---
+// @alias slice
+// ---
+// @param [list] $list: list to slice
+// @param [number] $start (1): start index
+// @param [number] $end (length($list)): end index
+// @param [string] $sep ('comma'): default list separator
+// ---
+// @return [list]
 
 @function list-slice($list, $start: 1, $end: length($list), $sep: 'comma') {
   $output: ();
@@ -42,12 +35,6 @@
     $output: append($output, nth($list, $i), $sep); }
   @return $output;
 }
-
-/**
- * @alias list-slice
- *
- * @since 1.0.0
- */
 
 @function slice($args...) { @return list-slice($args...); }
 

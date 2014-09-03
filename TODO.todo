@@ -1,0 +1,14 @@
+devel
+-	test the alternative logic for tuple-value
+	https://gist.github.com/lunelson/970f9b85017e9403c92d
+-	remove the sassdoc comments for now; delete docs dir
+
+updating
+-	add the 1.0.0-b3 tag
+-	push updates to npm, bower, rubygems, sache
+
+testing
+-	develop a test suite
+
+github
+-	make a homepage -- orphan branch?

@@ -1,0 +1,6 @@
+.debug {
+  out: 'hello world again';
+  out: '(
+    alpha 1,
+    beta 2
+  )'; }

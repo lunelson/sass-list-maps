@@ -1,6 +1,6 @@
 {
   "name": "Sass List–Maps",
-  "description": "Forward-compatible maps for libsass and ruby-sass <3.3 using lists",
+  "description": "Polyfill for map (hash/object) data functionality in libsass and ruby-sass < 3.3.x.",
   "tags": [
     "libsass",
     "sass",
