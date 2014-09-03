@@ -1,6 +1,22 @@
-.debug {
-  out: 'hello world again';
-  out: '(
-    alpha 1,
-    beta 2
-  )'; }
+.demo {
+  /*
+  basics
+  */
+  out: alpha, beta, gamma;
+  out: 1, 2, 3;
+  out: true;
+  out: false;
+  out: 1;
+  out: 2;
+  out: 3;
+  out: beta 2, gamma 3;
+  out: alpha 1, beta 2, gamma 4;
+  out: alpha 1, beta 2, gamma 4;
+  out: beta gamma 3;
+  out: gamma 3;
+  out: 3;
+  /*
+  map-json
+  */
+  out: '(alpha (beta (gamma 3)))';
+  out: '{ "alpha": { "beta": { "gamma": 3 } } }'; }

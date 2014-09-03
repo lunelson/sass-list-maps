@@ -1,11 +1,35 @@
 @import "../sass-list-maps";
 
-$test-map: (
-  alpha 1,
-  beta 2,
+$list-map: ( alpha 1, beta 2, gamma 3 );
+
+$list-map-z: (
+  alpha (
+    beta (
+      gamma 3
+    )
+  )
 );
 
-.debug {
-  out: 'hello world again';
-  out: map-pretty($test-map);
+.demo {
+  /*
+  basics
+  */
+  out: map-keys($list-map); //-> alpha, beta, gamma
+  out: map-values($list-map); //-> 1, 2, 3
+  out: map-has-key($list-map, gamma); //-> true
+  out: map-has-key($list-map, delta); //-> false
+  out: map-get($list-map, alpha); //-> 1
+  out: map-get($list-map, beta); //-> 2
+  out: map-get($list-map, gamma); //-> 3
+  out: map-remove($list-map, alpha);
+  out: map-merge($list-map, gamma 4);
+  out: map-merge-z($list-map, gamma, 4);
+  out: map-get-z($list-map-z, alpha); // -> ( beta ( gamma 3 ) )
+  out: map-get-z($list-map-z, alpha, beta); // -> ( gamma 3 )
+  out: map-get-z($list-map-z, alpha, beta, gamma); // -> 3
+  /*
+  map-json
+  */
+  out: map-inspect($list-map-z);
+  out: map-json($list-map-z);
 }

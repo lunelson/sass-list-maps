@@ -13,13 +13,13 @@ var strip_comments = require('gulp-strip-json-comments');
 // task: sass
 gulp.task('sass', function () {
     gulp.src('test/test.scss')
-        .pipe(strip_comments())
         .pipe(sass({
             errLogToConsole: false,
             onError: function(err) {
                 console.log(err);
             }
         }))
+        // .pipe(strip_comments())
         .pipe(gulp.dest('test'));
 });
 
