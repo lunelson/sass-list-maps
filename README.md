@@ -141,7 +141,7 @@ $short-map: map-remove($list-map, alpha);
 // -> $short-map = ( beta 2, gamma 3)
 ```
 
-**NB**: you might notice in the second example above, that the second argument to map-merge isn't really a 'list-map' it's just a list of two items. This is the so-called "single item" list conundrum in Sass which is a bit tricky, but these functions as of 0.9.5 handle this case automatically.
+**NB**: you might notice in the second example above, that the second argument to map-merge isn't really a 'list-map' it's just a list of two items. This is the so-called "single item" list conundrum in Sass which is a bit tricky; but as of v0.9.5 these functions handle this type of input so the API can mimic the native syntax as closely as possible.
 
 #### Advanced (beyond the ruby-sass 3.3.x native map functions)
 
