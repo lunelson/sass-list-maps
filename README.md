@@ -141,7 +141,7 @@ $short-map: map-remove($list-map, alpha);
 // -> $short-map = ( beta 2, gamma 3)
 ```
 
-**NB**: you might notice in the second example above, that the second argument to map-merge isn't really a 'list-map' it's just a list of two items. This is the so-called "single item" list conundrum in Sass which is a bit tricky; but as of v0.9.5 these functions handle this type of input so the API can mimic the native syntax as closely as possible.
+**NB**: you might notice in the second example above, that the second argument to map-merge isn't really a 'list-map' it's just a list of two items. This is the so-called "single item" list conundrum in Sass. As of v0.9.5 these functions handle this type of input so the API can mimic the native syntax as closely as possible.
 
 #### Advanced (beyond the ruby-sass 3.3.x native map functions)
 
@@ -271,12 +271,16 @@ Since the 'advanced' nested/chained `map-get-z()` and `map-merge-z()` take a var
 
 There are a few points that bear mentioning/repeating:
 
-* operating on global variables in libsass and in ruby-sass 3.2.x or earlier, works differently than in 3.3.x+: You can make changes to global variables from inside a mixin scope but you can't create them from there. There is no `!global` flag. This has implications for mixins that operate on global list-maps.
-* as noted, the 'list-map' syntax is less forgiving than that of native maps (watch your commas). Also, it lacks any error-checking (e.g. native maps will produce a warning if you have duplicate keys). And obviously fancy features of native maps such as passing a map to a function in the form `my-function($map...)` whereupon you can reference the key/value elements inside the function as if they were named variables, doesn't work with list-maps.
-* as of this writing, this code contains no test-suites or inline error-catches or warnings of any kind. I've been using it in my own work but there are surely edge-cases I haven't seen. I welcome reports and contributions!
+* operating on global variables in libsass and in ruby-sass 3.2.x or earlier works differently than in 3.3.x and later: You can make changes to global variables from inside a mixin scope but you can't create them from there. There is no `!global` flag. This has implications for how you declare and change global variables.
+* there is no error-checking for the data-type itself (e.g. native maps will produce a warning if you have duplicate keys). 
+* special features of native maps in ruby-sass, such as passing a map to a function in the form `my-function($map...)` whereupon you can reference the key/value pairs inside the function as if they were named variables, doesn't work here.
+* as noted, the 'list-map' syntax is in ruby-sass 3.2.x or earlier is still less forgiving than that of native maps (watch your commas).
+* as of this writing, this code contains no test-suites or inline error-catches or warnings of any kind. I've been using it in my own work and incrementally optimizing it, but I welcome reports and contributions!
 
 ### To-Dos
 
+* Push a SassDoc documented version (this will be 1.0.0 final)
+* Implement an error/warning system (probably 1.1.0)
 * Push a native maps version of the 'advanced' functions above
 
 ### Acknowledgements
