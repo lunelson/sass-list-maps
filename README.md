@@ -274,7 +274,7 @@ There are a few points that bear mentioning/repeating:
 * operating on global variables in libsass and in ruby-sass 3.2.x or earlier works differently than in 3.3.x and later: You can make changes to global variables from inside a mixin scope but you can't create them from there. There is no `!global` flag. This has implications for how you declare and change global variables.
 * there is no error-checking for the data-type itself (e.g. native maps will produce a warning if you have duplicate keys). 
 * special features of native maps in ruby-sass, such as passing a map to a function in the form `my-function($map...)` whereupon you can reference the key/value pairs inside the function as if they were named variables, doesn't work here.
-* as noted, the 'list-map' syntax is in ruby-sass 3.2.x or earlier is still less forgiving than that of native maps (watch your commas).
+* as noted, the 'list-map' syntax is in ruby-sass 3.2.x or earlier is still less forgiving than that of native maps (watch your commas), but it's a bit more easygoing in libsass, which is the more likely use-case.
 * as of this writing, this code contains no test-suites or inline error-catches or warnings of any kind. I've been using it in my own work and incrementally optimizing it, but I welcome reports and contributions!
 
 ### To-Dos
