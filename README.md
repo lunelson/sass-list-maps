@@ -30,7 +30,8 @@ npm install sass-list-maps
 # installation with bower
 bower install sass-list-maps
 
-# if using grunt-sass, you need to set 'includePaths' option
+# if using grunt-sass, you might want to set 'includePaths'
+# to match install location of bower or npm.
 options: {
   includePaths: [
     './bower_components/sass-list-maps'
@@ -48,15 +49,17 @@ You can of course also just fork or download this repo or copy-and-paste, as the
 
 ### Introduction
 
-Maps (known in programming as hashes, dictionaries, or objects<sup>1</sup>) allow dynamic creating, setting, merging and retrieving of data. They are native to ruby-sass as of version 3.3.x, but for earlier ruby-sass versions, and for the libsass C-based compiler (until the point at which maps are integrated there natively), this is an alternative solution which feature-matches ruby-sass' 3.3.x map functionality using the `list` data-type. Additional functions are also provided to allow nested (chained) getting and merging/setting, and inspection for debugging.
+Maps (known in programming as hashes, dictionaries, or objects<sup>1</sup>) allow dynamic creating, setting, merging and retrieving of data. They are native to ruby-sass as of version 3.3.x, but for earlier ruby-sass versions, and for the libsass C-based compiler (until the point at which maps are integrated there natively), this is an alternative solution which feature-matches ruby-sass' 3.3.x map functionality using the `list` data-type. 
+
+Some additional functions are also provided to allow nested (chained) getting and merging/setting, and inspection for debugging.
 
 *<sup>1</sup>objects (as in javascript) are not exactly the same thing as maps and hashes, but for these purposes close enough.*
 
 #### Syntax
 
-Compared to ruby-sass' native maps, 'list-maps' are lists like any other list in Sass, but they are *lists of pairs*, formatted in such a way as to be interpreted like a map. To this purpose, the first item in each pair is interpreted as the 'key' (usually a string), while the second is interpreted as the correspondent 'value'. This 'value' can be any Sass-script data-type, including a list—which means list-maps can contain other list-maps, allowing them to form nested data structures.
+Compared to ruby-sass' native maps, 'list-maps' are lists like any other list in Sass, but they are *lists of pairs*, formatted in such a way as to be interpreted like a map. To this purpose, the first item in each pair is interpreted as the 'key', while the second is interpreted as the correspondent 'value'. This 'value' can be any Sass-script data-type, including a list—which means list-maps can contain other list-maps, allowing them to form nested data structures. The formatting used here keeps as close as possible to the syntax of native maps, with the difference that there no colons (`:`) used. 
 
-The formatting used here keeps as close as possible to the syntax of native maps, with the difference that there no colons (`:`) used, and the placement of commas is more critical (e.g. a comma after the last item is not allowed):
+*NB: in ruby-sass 3.2.x or lower, the placement of commas is also very critical (no comma after the last item); but in libsass as of 2.0 you can put commas after each item if you wish.*
 
 ```scss
 /* a single-line list-map -- compatible with any
@@ -87,11 +90,11 @@ s$native-map-z: (
 );
 ```
 
-It should be clear that these 'list-maps' and ruby-sass' native maps are very similar—in fact they are in principle the same (native maps are a special type of list). For this reason it was possible to reverse engineer the map functions of ruby-sass' 3.3+ to use the SassScript 'list' data-type.
+It should be clear that 'list-maps' and ruby-sass 'native' maps are very similar—in fact, they are in principle the same. For this reason it was possible to reverse engineer the map functions of ruby-sass' 3.3+ to use the SassScript `list` data-type. Moreover, as with native maps in ruby-sass, list functions (e.g. `nth()`, `index()`) can be used on list-maps, since they are still lists.
 
 ### The Functions
 
-These functions have the same names as the map functions in ruby-sass >= 3.3.x, which means that if they were used in ruby-sass 3.3.x or higher they would conflict. Therefore, the following code assume a sass environment of either ruby-sass < 3.3.x or libsass. Also, as with native maps in ruby-sass, native list functions (e.g. `nth()`, `index()`) can also be used on list-maps since they are still lists.
+These functions have the same names as the built-in map functions in ruby-sass >= 3.3.x, which means that if they were used in ruby-sass 3.3.x or higher they would conflict with (or at least overwrite) the built-in ones. Therefore, the following code assume you are using either ruby-sass 3.2.x or earlier, or libsass (currently 2.1b). 
 
 #### Core (matching the ruby-sass 3.3.x native map functions)
 
