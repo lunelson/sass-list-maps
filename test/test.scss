@@ -31,5 +31,6 @@ $list-map-z: (
   map-json
   */
   out: map-inspect($list-map-z);
+  out: map-pretty($list-map-z);
   out: map-json($list-map-z);
 }
