@@ -19,4 +19,11 @@
   map-json
   */
   out: '(alpha (beta (gamma 3)))';
+  out: '(
+    alpha (
+      beta (
+        gamma 3
+      )
+    )
+  )';
   out: '{ "alpha": { "beta": { "gamma": 3 } } }'; }

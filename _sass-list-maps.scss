@@ -19,7 +19,7 @@
 
 // list-slice(): return a sub-list from a list, 'sliced' from/to given indices
 // ---
-// @alias slice
+// @alias slice()
 // ---
 // @param [list] $list: list to slice
 // @param [number] $start (1): start index
@@ -33,11 +33,12 @@
     $output: append($output, nth($list, $i), $sep); }
   @return $output;
 }
+// alias
 @function slice($args...) { @return list-slice($args...); }
 
 // list-set-nth(): return a list with value at index set/updated to new value
 // ---
-// @alias set-nth
+// @alias set-nth()
 // ---
 // @param [list] $list: list to set
 // @param [number] $index: index to set
@@ -64,6 +65,7 @@
   }
   @return $output;
 }
+// alias
 @function set-nth($args...) { @return list-set-nth($args...); }
 
 ///////////////////////////////
@@ -72,7 +74,7 @@
 
 // tuple-key(): return the key (first value) from a tuple (pair)
 // ---
-// @alias key
+// @alias key()
 // ---
 // [0.9.3] added alias
 // ---
@@ -83,6 +85,7 @@
   @if length($tuple) < 1 { @return null; }
   @return nth($tuple, 1);
 }
+// alias
 @function key($tuple) { @return tuple-key($tuple); }
 
 // tuple-value(): return the value (second value) from a tuple (pair)
@@ -98,6 +101,7 @@
   @if length($tuple) < 2 { @return null; }
   @return nth($tuple, 2);
 }
+// alias
 @function value($tuple) { @return tuple-value($tuple); }
 
 // list-map-check(): return list-map from list; ensure input list-maps are lists-of-lists
@@ -142,6 +146,7 @@
   }
   @return $output;
 }
+// alias
 @function keys($list...) { @return map-keys($list...); }
 
 // map-values(): return comma-separated list of values from map [conformant with rubysass map-values()]
@@ -161,6 +166,7 @@
   }
   @return $output;
 }
+// alias
 @function values($list...) { @return map-values($list...); }
 
 // map-has-key(): check whether key exists in map at root level [conformant with rubysass map-has-key()]
@@ -180,6 +186,7 @@
   }
   @return false;
 }
+// alias
 @function has-key($list, $key) { @return map-has-key($list, $key); }
 
 ////////////////////////////////////////////////////////////
@@ -230,6 +237,8 @@
 
 // map-remove(): return map with tuples removed, according to keys (if found); conformant to rubysass 3.4 map-remove()
 // ---
+// @alias remove()
+// ---
 // @param [list] $list: map
 // @param [literal] $key: key
 // ---
@@ -244,6 +253,8 @@
   }
   @return $output;
 }
+// alias
+@function remove($list, $keys...) { @return map-remove($list, $keys...); }
 
 //
 //                       88                                                                         88
@@ -265,7 +276,7 @@
 // [0.9.5] now uses list-map-check to handle single-pair list-maps
 // [0.9.2] aliased to get(); can replace map-get() and map-get-z() in usage
 // ---
-// @alias `get`
+// @alias get()
 // ---
 // @param [list] $list: map
 // @param [argList] $keys: nested / chained key list (where to get value)
@@ -292,7 +303,7 @@
 // [0.9.5] now uses list-map-check to handle single-pair list-maps
 // [0.9.2] aliased to merge() and set(); can replace map-merge() and map-merge-z() in usage
 // ---
-// @alias `merge`, `set`
+// @alias merge(), set()
 // ---
 // @param [list] $list: map
 // @param [argList] $keys-and-values: nested / chained key list (where to merge value); final item in list is the value to be merged
@@ -345,6 +356,8 @@
 // ---
 // [0.9.5] added
 // ---
+// @alias prev-key()
+// ---
 // @param [list] $list: map
 // @param [literal] $key: pivot key
 // ---
@@ -354,10 +367,14 @@
   $keys: map-keys($list);
   @return nth($keys, index($keys, $key) - 1);
 }
+// alias
+@function prev-key($list, $key) { @return map-prev-key($list, $key); }
 
 // map-next-key(): return next key from map
 // ---
 // [0.9.5] added
+// ---
+// @alias next-key()
 // ---
 // @param [list] $list: map
 // @param [literal] $key: pivot key
@@ -368,6 +385,8 @@
   $keys: map-keys($list);
   @return nth($keys, index($keys, $key) + 1);
 }
+// alias
+@function next-key($list, $key) { @return map-next-key($list, $key); }
 
 // map-inspect(): return the string representation of a map
 // ---
@@ -400,7 +419,9 @@
 // map-pretty(): return the string representation of a map with indents and line breaks
 // ---
 // [0.9.9] added
-//
+// ---
+// @alias map-inspect-pretty()
+// ---
 // @param [list] $list: map
 // @param [number] $level (1): internal variable, do not touch
 // ---
@@ -431,7 +452,6 @@
 }
 // aliases
 @function map-inspect-pretty($list...) { @return map-pretty($list...); }
-@function map-inspect-p($list...) { @return map-pretty($list...); }
 
 // map-sort(): return sorted list-map, based on values at given key(s)
 // ---
