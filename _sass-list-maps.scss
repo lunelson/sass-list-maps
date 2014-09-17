@@ -237,8 +237,6 @@
 
 // map-remove(): return map with tuples removed, according to keys (if found); conformant to rubysass 3.4 map-remove()
 // ---
-// @alias remove()
-// ---
 // @param [list] $list: map
 // @param [literal] $key: key
 // ---
@@ -253,8 +251,6 @@
   }
   @return $output;
 }
-// alias
-@function remove($list, $keys...) { @return map-remove($list, $keys...); }
 
 //
 //                       88                                                                         88
