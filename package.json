@@ -1,6 +1,6 @@
 {
   "name": "sass-list-maps",
-  "version": "1.0.0-b3",
+  "version": "1.0.0",
   "description": "Polyfill for map (hash/object) data functionality in libsass and ruby-sass < 3.3.x.",
   "main": "gulpfile.js",
   "directories": {
