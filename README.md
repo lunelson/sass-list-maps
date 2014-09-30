@@ -1,6 +1,8 @@
 ## Sass List–Maps
 
-These functions provide a forward-compatible polyfill for map (hash) data-type functionality in [libsass](http://libsass.org/) and [ruby-sass](http://sass-lang.com/) 3.2.x using the SassScript `list` data-type. They feature-match all the current native (ruby-sass) `map` functions, and add nested (or 'chained') `get()`, `set()` and `merge()` functions and inspection / debugging functions as well.
+These functions provide a forward-compatible polyfill for SassScript `map` (hash) data-type functionality in [libsass](http://libsass.org/) and [ruby-sass](http://sass-lang.com/) 3.2.x using the `list` data-type. They feature-match all the current native (ruby-sass) `map` functions, and add nested (or 'chained') `get()`, `set()` and `merge()` functions and inspection / debugging functions as well.
+
+#### NB: these functions may soon be obsolete, as [SassScript Maps may soon land in libsass](https://github.com/sass/libsass/pull/481). At that point I will put up a new library that offers the same advanced functions for the native implementation as for this polyfill.
 
 ![](sass-hash.jpg)
 
@@ -49,7 +51,7 @@ You can of course also just fork or download this repo or copy-and-paste, as the
 
 ### Introduction
 
-Maps (known in programming as hashes, dictionaries, or objects<sup>1</sup>) allow dynamic creating, setting, merging and retrieving of data. They are native to ruby-sass as of version 3.3.x, but for earlier ruby-sass versions, and for the libsass C-based compiler (until the point at which maps are integrated there natively), this is an alternative solution which feature-matches ruby-sass' 3.3.x map functionality using the `list` data-type. 
+Maps (known in programming as hashes, dictionaries, or objects<sup>1</sup>) allow dynamic creating, setting, merging and retrieving of data. They are native to ruby-sass as of version 3.3.x, but for earlier ruby-sass versions, and for the libsass C-based compiler (until the point at which maps are integrated there natively), this is an alternative solution which feature-matches ruby-sass' 3.3.x map functionality using the `list` data-type.
 
 Some additional functions are also provided to allow nested (chained) getting and merging/setting, and inspection for debugging.
 
@@ -57,7 +59,7 @@ Some additional functions are also provided to allow nested (chained) getting an
 
 #### Syntax
 
-Compared to ruby-sass' native maps, 'list-maps' are lists like any other list in Sass, but they are *lists of pairs*, formatted in such a way as to be interpreted like a map. To this purpose, the first item in each pair is interpreted as the 'key', while the second is interpreted as the correspondent 'value'. This 'value' can be any Sass-script data-type, including a list—which means list-maps can contain other list-maps, allowing them to form nested data structures. The formatting used here keeps as close as possible to the syntax of native maps, with the difference that there no colons (`:`) used. 
+Compared to ruby-sass' native maps, 'list-maps' are lists like any other list in Sass, but they are *lists of pairs*, formatted in such a way as to be interpreted like a map. To this purpose, the first item in each pair is interpreted as the 'key', while the second is interpreted as the correspondent 'value'. This 'value' can be any Sass-script data-type, including a list—which means list-maps can contain other list-maps, allowing them to form nested data structures. The formatting used here keeps as close as possible to the syntax of native maps, with the difference that there no colons (`:`) used.
 
 *NB: in ruby-sass 3.2.x or lower, the placement of commas is also very critical (no comma after the last item); but in libsass as of 2.0 you can put commas after each item if you wish.*
 
@@ -94,7 +96,7 @@ It should be clear that 'list-maps' and ruby-sass 'native' maps are very similar
 
 ### The Functions
 
-These functions have the same names as the built-in map functions in ruby-sass >= 3.3.x, which means that if they were used in ruby-sass 3.3.x or higher they would conflict with (or at least overwrite) the built-in ones. Therefore, the following code assume you are using either ruby-sass 3.2.x or earlier, or libsass (currently 2.1b). 
+These functions have the same names as the built-in map functions in ruby-sass >= 3.3.x, which means that if they were used in ruby-sass 3.3.x or higher they would conflict with (or at least overwrite) the built-in ones. Therefore, the following code assume you are using either ruby-sass 3.2.x or earlier, or libsass (currently 2.1b).
 
 #### Core (matching the ruby-sass 3.3.x native map functions)
 
@@ -272,7 +274,7 @@ Since the 'advanced' nested/chained `map-get-z()` and `map-merge-z()` take a var
 There are a few points that bear mentioning/repeating:
 
 * operating on global variables in libsass and in ruby-sass 3.2.x or earlier works differently than in 3.3.x and later: You can make changes to global variables from inside a mixin scope but you can't create them from there. There is no `!global` flag. This has implications for how you declare and change global variables.
-* there is no error-checking for the data-type itself (e.g. native maps will produce a warning if you have duplicate keys). 
+* there is no error-checking for the data-type itself (e.g. native maps will produce a warning if you have duplicate keys).
 * special features of native maps in ruby-sass, such as passing a map to a function in the form `my-function($map...)` whereupon you can reference the key/value pairs inside the function as if they were named variables, doesn't work here.
 * as noted, the 'list-map' syntax is in ruby-sass 3.2.x or earlier is still less forgiving than that of native maps (watch your commas), but it's a bit more easygoing in libsass, which is the more likely use-case.
 * as of this writing, this code contains no test-suites or inline error-catches or warnings of any kind. I've been using it in my own work and incrementally optimizing it, but I welcome reports and contributions!
