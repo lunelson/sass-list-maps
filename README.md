@@ -17,7 +17,7 @@ These functions provide a forward-compatible polyfill for map (hash) data-type f
 
 #### Try it
 
-You can test-drive these functions at [Sassmeister, in this pre-loaded gist](http://sassmeister.com/gist/29b2e72c4c7df859ec10)—but note that the libsass version at Sassmeister might be a couple of point-releases behind this repo.
+You can test-drive these functions at [Sassmeister, in this pre-loaded gist](http://sassmeister.com/gist/e09b4c514faa051bd5fa)—but note that the libsass version at Sassmeister might be a couple of point-releases behind this repo.
 
 #### Install it
 
