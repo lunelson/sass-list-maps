@@ -8,6 +8,7 @@ These functions provide a forward-compatible polyfill for SassScript `map` (hash
 
 #### Updates
 
+* 1.0.0 -- bumping for now, as there are no new features/issues
 * 1.0.0-b3 -- altered use of `list-map-check()` in `map-get()` and `map-get-z()` functions, to avoid double-wrapped-output edge case
 * 1.0.0-b2 -- updated `map-remove()` function to allow removing multiple keys; conformant to ruby-sass 3.4.
 * 1.0.0-b -- preparing for 1.0; added npm distribution and newly commented source code thanks to Hugo Giraudel. Next version will use SassDoc-style comments.
