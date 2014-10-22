@@ -2,7 +2,7 @@
 
 These functions provide a forward-compatible polyfill for SassScript `map` (hash) data-type functionality in [libsass](http://libsass.org/) and [ruby-sass](http://sass-lang.com/) 3.2.x using the `list` data-type. They feature-match all the current native (ruby-sass) `map` functions, and add nested (or 'chained') `get()`, `set()` and `merge()` functions and inspection / debugging functions as well.
 
-#### NB: these functions may soon be obsolete, as [SassScript Maps may soon land in libsass](https://github.com/sass/libsass/pull/481). At that point I will put up a new library that offers the same advanced functions for the native implementation as for this polyfill.
+##### NB: these functions will soon be obsolete, as [SassScript Maps have landed in libsass 3.0](http://github.com/sass/libsass/releases/tag/3.0); however I will keep them on at least until 3.1. I will also shortly put up a new library that offers the same 'advanced' functions for native maps as for this polyfill.
 
 ![](sass-hash.jpg)
 
