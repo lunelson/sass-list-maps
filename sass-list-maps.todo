@@ -1,6 +1,0 @@
--	merge getfix branch to master
--	finish sassdoc comments
--	make a webpage for it
--	consider alternate logic for tuple-value() https://gist.github.com/lunelson/970f9b85017e9403c92d
--	test and document sort and json functions
--	add error handling @warn framework

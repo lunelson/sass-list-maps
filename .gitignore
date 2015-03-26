@@ -1,4 +1,6 @@
 docs*
 *.gem
-*.sublime*
+*-cache
+*.sublime-*
 node_modules
+

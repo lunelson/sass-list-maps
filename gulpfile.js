@@ -4,7 +4,6 @@
 
 var gulp           = require('gulp');
 var sass           = require('gulp-sass');
-var strip_comments = require('gulp-strip-json-comments');
 
 //////////
 // sass //
@@ -19,7 +18,6 @@ gulp.task('sass', function () {
                 console.log(err);
             }
         }))
-        // .pipe(strip_comments())
         .pipe(gulp.dest('test'));
 });
 
