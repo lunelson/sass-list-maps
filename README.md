@@ -84,7 +84,7 @@ $list-map-z: (
 );
 
 /* a mutli-line ruby-sass native map */
-s$native-map-z: (
+$native-map-z: (
   alpha: (
     beta: (
       gamma: 3,
