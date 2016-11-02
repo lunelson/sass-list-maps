@@ -1,0 +1,4 @@
+{
+  "watch": [ "test"],
+  "ext": "scss"
+}
